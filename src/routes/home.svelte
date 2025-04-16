@@ -101,119 +101,123 @@
 <svelte:head>
     <title>My Personal Website</title>
     <meta name="description" content="Personal website" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </svelte:head>
 
-<main>
-    <nav class="menu-bar">
-        <ul>
-            <li><a href="#about-section" on:click={(e) => scrollToSection(e, 'about-section')}>About</a></li>
-            <li><a href="#projects-section" on:click={(e) => scrollToSection(e, 'projects-section')}>Projects</a></li>
-            <li><a href="#contact-section" on:click={(e) => scrollToSection(e, 'contact-section')}>Contact</a></li>
-        </ul>
-    </nav>
-
-    <section class="hero" bind:this={sections[0]} class:visible={visibleSections[0]}>
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1>Minette Kaunismäki</h1>
-                <h1>Developer Advocate</h1>
-                <p class="location">Paris, France</p>
-            </div>
-            <img src="/IMG_8607.jpg" alt="Minette Kaunismäki" class="hero-image" />
-        </div>
-    </section>
-
-    <section id="about-section" class="about" bind:this={sections[1]} class:visible={visibleSections[1]}>
-        <h2>About Me</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>
-                    Hello! I'm a web developer with a passion for creating beautiful and functional websites. 
-                    I love learning new technologies and solving complex problems.
-                </p>
-            </div>
-            <div class="skills">
-                <h3>Skills</h3>
-                <div class="skills-grid">
-                    {#each skills as skill}
-                        <div class="skill-item">{skill}</div>
-                    {/each}
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects-section" class="projects" bind:this={sections[2]} class:visible={visibleSections[2]}>
-        <h2>My Projects</h2>
-        <div class="project-grid">
-            {#each projects as project}
-                <a href="/projects/{project.id}" class="project-card">
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                    <div class="technologies">
-                        {#each project.technologies as tech}
-                            <span class="tech-tag">{tech}</span>
-                        {/each}
-                    </div>
-                </a>
-            {/each}
-        </div>
-    </section>
-
-    <section id="contact-section" class="contact" bind:this={sections[3]} class:visible={visibleSections[3]}>
-        <h2>Get in Touch</h2>
-        <div class="contact-content">
-            <form on:submit|preventDefault={handleSubmit}>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        bind:value={name}
-                        required
-                        placeholder="Your name"
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        bind:value={email}
-                        required
-                        placeholder="Your email"
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea
-                        id="message"
-                        bind:value={message}
-                        required
-                        placeholder="Your message"
-                    ></textarea>
-                </div>
-                <button type="submit" disabled={isSubmitting}>
-                    {#if isSubmitting}
-                        Sending...
-                    {:else}
-                        Send Message
-                    {/if}
-                </button>
-            </form>
-            {#if submitSuccess}
-                <div class="success-message" transition:fade>
-                    Thank you for your message! I'll get back to you soon.
-                </div>
-            {/if}
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-content">
+            <h1 class="name">Minette Kaunismäki</h1>
+            <h2 class="title">Developer Advocate</h2>
+            
+            <nav class="menu-bar">
+                <ul>
+                    <li><a href="#about-section" on:click={(e) => scrollToSection(e, 'about-section')}>About</a></li>
+                    <li><a href="#projects-section" on:click={(e) => scrollToSection(e, 'projects-section')}>Projects</a></li>
+                    <li><a href="#contact-section" on:click={(e) => scrollToSection(e, 'contact-section')}>Contact</a></li>
+                </ul>
+            </nav>
+            
             <div class="social-links">
                 <a href="https://github.com/yourusername" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 <a href="https://linkedin.com/in/yourusername" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 <a href="https://twitter.com/yourusername" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-    </section>
-</main>
+    </aside>
+    
+    <main class="main-content">
+        <section class="hero" bind:this={sections[0]} class:visible={visibleSections[0]}>
+            <img src="/IMG_8607.jpg" alt="Minette Kaunismäki" class="hero-image" />
+        </section>
+
+        <section id="about-section" class="about" bind:this={sections[1]} class:visible={visibleSections[1]}>
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Hello! I'm a web developer with a passion for creating beautiful and functional websites. 
+                        I love learning new technologies and solving complex problems.
+                    </p>
+                </div>
+                <div class="skills">
+                    <h3>Skills</h3>
+                    <div class="skills-grid">
+                        {#each skills as skill}
+                            <div class="skill-item">{skill}</div>
+                        {/each}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects-section" class="projects" bind:this={sections[2]} class:visible={visibleSections[2]}>
+            <h2>My Projects</h2>
+            <div class="project-grid">
+                {#each projects as project}
+                    <a href="/projects/{project.id}" class="project-card">
+                        <h3>{project.title}</h3>
+                        <p>{project.description}</p>
+                        <div class="technologies">
+                            {#each project.technologies as tech}
+                                <span class="tech-tag">{tech}</span>
+                            {/each}
+                        </div>
+                    </a>
+                {/each}
+            </div>
+        </section>
+
+        <section id="contact-section" class="contact" bind:this={sections[3]} class:visible={visibleSections[3]}>
+            <h2>Get in Touch</h2>
+            <div class="contact-content">
+                <form on:submit|preventDefault={handleSubmit}>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            bind:value={name}
+                            required
+                            placeholder="Your name"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            bind:value={email}
+                            required
+                            placeholder="Your email"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea
+                            id="message"
+                            bind:value={message}
+                            required
+                            placeholder="Your message"
+                        ></textarea>
+                    </div>
+                    <button type="submit" disabled={isSubmitting}>
+                        {#if isSubmitting}
+                            Sending...
+                        {:else}
+                            Send Message
+                        {/if}
+                    </button>
+                </form>
+                {#if submitSuccess}
+                    <div class="success-message" transition:fade>
+                        Thank you for your message! I'll get back to you soon.
+                    </div>
+                {/if}
+            </div>
+        </section>
+    </main>
+</div>
 
 <style>
     /* Base styles */
@@ -226,12 +230,105 @@
         scroll-behavior: smooth;
     }
 
-    main {
-        overflow-x: hidden;
+    .layout {
+        display: flex;
+        min-height: 100vh;
+    }
+
+    /* Sidebar styles */
+    .sidebar {
+        width: 400px;
+        position: fixed;
+        height: 100vh;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #fff;
+        border-right: 1px solid #eee;
+    }
+
+    .sidebar-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .name {
+        font-size: 2.5rem;
+        font-weight: 500;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .title {
+        font-size: 1.4rem;
+        font-weight: 400;
+        margin: 0;
+        color: #666;
+    }
+
+    .location {
+        font-size: 1.1rem;
+        color: #999;
+        margin: 0;
+    }
+
+    /* Menu styles */
+    .menu-bar {
+        margin-top: 3rem;
+    }
+
+    .menu-bar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .menu-bar a {
+        color: #000;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 300;
+        transition: color 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .menu-bar a:hover {
+        color: #666;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .social-links a {
+        color: #000;
+        font-size: 1.8rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .social-links a:hover {
+        color: #666;
+        transform: translateY(-2px);
+    }
+
+    /* Main content styles */
+    .main-content {
+        flex: 1;
+        margin-left: 400px;
+        padding: 2rem;
     }
 
     section {
-        padding: 8rem 2rem;
+        padding: 4rem 0;
         opacity: 0;
         transform: translateY(20px);
         transition: opacity 0.8s ease, transform 0.8s ease;
@@ -247,91 +344,27 @@
         letter-spacing: -0.5px;
     }
 
-    /* Menu styles */
-    .menu-bar {
-        position: fixed;
-        top: 2rem;
-        right: 2rem;
-        z-index: 1000;
-    }
-
-    .menu-bar ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        gap: 2rem;
-    }
-
-    .menu-bar a {
-        color: #000;
-        text-decoration: none;
-        font-size: 1rem;
-        font-weight: 300;
-        transition: color 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .menu-bar a:hover {
-        color: #666;
-    }
-
     /* Hero section */
     .hero {
-        min-height: 100vh;
+        min-height: 60vh;
         display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        background-color: #fff;
-        padding: 5vh 5vw;
-    }
-
-    .hero-container {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .hero-content {
-        position: relative;
-        z-index: 1;
-        height: 38.2vh;
-        display: flex;
-        flex-direction: column;
+        align-items: center;
         justify-content: center;
-    }
-
-    .hero-content h1 {
-        font-size: 4rem;
-        margin: 0;
-        font-weight: 500;
-        line-height: 1;
-    }
-
-    .hero-content .location {
-        font-size: 1.2rem;
-        color: #999;
-        font-weight: 300;
-        margin: 0;
-        line-height: 1;
+        background-color: #fff;
     }
 
     .hero-image {
-        width: 100vw;
-        margin-left: calc(-50vw + 50%);
-        margin-right: calc(-50vw + 50%);
-        height: 61.8vh;
+        max-width: 100%;
+        max-height: 60vh;
         object-fit: cover;
     }
 
     /* About section */
     .about-content {
-        max-width: 1200px;
+        max-width: 800px;
         margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex;
+        flex-direction: column;
         gap: 4rem;
     }
 
@@ -339,6 +372,16 @@
         font-size: 1.2rem;
         line-height: 1.8;
         color: #333;
+        margin-bottom: 2rem;
+    }
+
+    .skills {
+        width: 100%;
+    }
+
+    .skills h3 {
+        margin-bottom: 2rem;
+        font-size: 1.4rem;
     }
 
     .skills-grid {
@@ -365,9 +408,9 @@
     /* Projects section */
     .project-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        grid-template-columns: 1fr;
         gap: 3rem;
-        max-width: 1400px;
+        max-width: 800px;
         margin: 0 auto;
     }
 
@@ -485,35 +528,32 @@
         border: 1px solid #eee;
     }
 
-    .social-links {
-        display: flex;
-        justify-content: center;
-        gap: 3rem;
-        margin-top: 3rem;
-    }
-
-    .social-links a {
-        color: #000;
-        font-size: 1.5rem;
-        transition: all 0.3s ease;
-    }
-
-    .social-links a:hover {
-        color: #666;
-    }
-
     /* Responsive design */
     @media (max-width: 768px) {
+        .layout {
+            flex-direction: column;
+        }
+        
+        .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+            padding: 2rem;
+            border-right: none;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .main-content {
+            margin-left: 0;
+            padding: 1rem;
+        }
+        
         .about-content {
             grid-template-columns: 1fr;
         }
 
         .hero-content h1 {
             font-size: 2.5rem;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
         }
 
         .project-grid {
