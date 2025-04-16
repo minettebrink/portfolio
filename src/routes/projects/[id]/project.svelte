@@ -29,35 +29,47 @@
     
     // Find the current project
     const project = projects.find(p => p.id === projectId);
+
+    function scrollToProjects(event: MouseEvent) {
+        event.preventDefault();
+        window.location.href = '/#projects-section';
+    }
 </script>
 
-<nav class="menu-bar">
-    <ul>
-        <li><a href="/">Back to Home</a></li>
-    </ul>
-</nav>
+<svelte:head>
+    <title>{project ? project.title : 'Project Not Found'} - Minette Kaunismäki</title>
+    <meta name="description" content={project ? project.description : 'Project not found'} />
+</svelte:head>
 
-{#if project}
-    <section class="project-section">
-        <div class="container">
-            <h1>{project.title}</h1>
-            <div class="technologies">
-                {#each project.technologies as tech}
-                    <span class="tech-tag">{tech}</span>
-                {/each}
+<main>
+    <nav class="menu-bar">
+        <ul>
+            <li><a href="/#projects-section" on:click={scrollToProjects}>Back to Projects</a></li>
+        </ul>
+    </nav>
+
+    {#if project}
+        <section class="project-section">
+            <div class="container">
+                <h1>{project.title}</h1>
+                <div class="technologies">
+                    {#each project.technologies as tech}
+                        <span class="tech-tag">{tech}</span>
+                    {/each}
+                </div>
+                <p class="description">{project.description}</p>
             </div>
-            <p class="description">{project.description}</p>
-        </div>
-    </section>
-{:else}
-    <main class="error-page">
-        <div class="container">
-            <h1>Project Not Found</h1>
-            <p>The project you're looking for doesn't exist.</p>
-            <a href="/" class="back-link">Back to Home</a>
-        </div>
-    </main>
-{/if}
+        </section>
+    {:else}
+        <main class="error-page">
+            <div class="container">
+                <h1>Project Not Found</h1>
+                <p>The project you're looking for doesn't exist.</p>
+                <a href="/" class="back-link">Back to Home</a>
+            </div>
+        </main>
+    {/if}
+</main>
 
 <style>
     /* Base styles */
