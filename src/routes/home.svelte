@@ -9,14 +9,22 @@
     let submitSuccess = false;
     let isMenuOpen = false;
     
-    const skills = [
-        'Python',
-        'CSS3',
-        'JavaScript',
-        'Svelte',
-        'Node.js',
-        'React',
-        'TypeScript'
+    const timeline = [
+        {
+            year: '2023',
+            title: 'Developer Advocate',
+            description: 'Working to bridge the gap between developers and product teams.'
+        },
+        {
+            year: '2022',
+            title: 'Senior Developer',
+            description: 'Led development of multiple web applications using modern frameworks.'
+        },
+        {
+            year: '2021',
+            title: 'Full Stack Developer',
+            description: 'Built and maintained various web applications and APIs.'
+        }
     ];
     
     const projects = [
@@ -109,19 +117,20 @@
         <div class="sidebar-content">
             <h1 class="name">Minette Kaunismäki</h1>
             <h2 class="title">Developer Advocate</h2>
+            <p class="description">Turning Developer Feedback into Results</p>
             
             <nav class="menu-bar">
                 <ul>
                     <li><a href="#about-section" on:click={(e) => scrollToSection(e, 'about-section')}>About</a></li>
+                    <li><a href="#experience-section" on:click={(e) => scrollToSection(e, 'experience-section')}>Experience</a></li>
                     <li><a href="#projects-section" on:click={(e) => scrollToSection(e, 'projects-section')}>Projects</a></li>
-                    <li><a href="#contact-section" on:click={(e) => scrollToSection(e, 'contact-section')}>Contact</a></li>
                 </ul>
             </nav>
             
             <div class="social-links">
-                <a href="https://github.com/yourusername" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/yourusername" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://twitter.com/yourusername" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
     </aside>
@@ -140,18 +149,36 @@
                         I love learning new technologies and solving complex problems.
                     </p>
                 </div>
-                <div class="skills">
-                    <h3>Skills</h3>
-                    <div class="skills-grid">
-                        {#each skills as skill}
-                            <div class="skill-item">{skill}</div>
-                        {/each}
-                    </div>
+            </div>
+        </section>
+
+        <section id="experience-section" class="experience" bind:this={sections[2]} class:visible={visibleSections[2]}>
+            <h2>Experience</h2>
+            <div class="experience-content">
+                <div class="experience-item">
+                    <h3>Developer Advocate</h3>
+                    <p class="company">Company Name</p>
+                    <p class="period">2023 - Present</p>
+                    <ul>
+                        <li>Led developer community engagement initiatives</li>
+                        <li>Created technical content and documentation</li>
+                        <li>Organized and spoke at developer events</li>
+                    </ul>
+                </div>
+                <div class="experience-item">
+                    <h3>Senior Developer</h3>
+                    <p class="company">Previous Company</p>
+                    <p class="period">2022 - 2023</p>
+                    <ul>
+                        <li>Led development of multiple web applications</li>
+                        <li>Mentored junior developers</li>
+                        <li>Implemented modern development practices</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <section id="projects-section" class="projects" bind:this={sections[2]} class:visible={visibleSections[2]}>
+        <section id="projects-section" class="projects" bind:this={sections[3]} class:visible={visibleSections[3]}>
             <h2>My Projects</h2>
             <div class="project-grid">
                 {#each projects as project}
@@ -165,55 +192,6 @@
                         </div>
                     </a>
                 {/each}
-            </div>
-        </section>
-
-        <section id="contact-section" class="contact" bind:this={sections[3]} class:visible={visibleSections[3]}>
-            <h2>Get in Touch</h2>
-            <div class="contact-content">
-                <form on:submit|preventDefault={handleSubmit}>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input
-                            type="text"
-                            id="name"
-                            bind:value={name}
-                            required
-                            placeholder="Your name"
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            bind:value={email}
-                            required
-                            placeholder="Your email"
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea
-                            id="message"
-                            bind:value={message}
-                            required
-                            placeholder="Your message"
-                        ></textarea>
-                    </div>
-                    <button type="submit" disabled={isSubmitting}>
-                        {#if isSubmitting}
-                            Sending...
-                        {:else}
-                            Send Message
-                        {/if}
-                    </button>
-                </form>
-                {#if submitSuccess}
-                    <div class="success-message" transition:fade>
-                        Thank you for your message! I'll get back to you soon.
-                    </div>
-                {/if}
             </div>
         </section>
     </main>
@@ -233,6 +211,7 @@
     .layout {
         display: flex;
         min-height: 100vh;
+        margin-top: 5rem;
     }
 
     /* Sidebar styles */
@@ -243,15 +222,14 @@
         padding: 3rem;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         background-color: #fff;
-        border-right: 1px solid #eee;
     }
 
     .sidebar-content {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: 0.75rem;
+        padding-top: 2rem;
     }
 
     .name {
@@ -262,21 +240,23 @@
     }
 
     .title {
-        font-size: 1.4rem;
+        font-size: 1.8rem;
         font-weight: 400;
         margin: 0;
         color: #666;
     }
 
-    .location {
+    .description {
         font-size: 1.1rem;
-        color: #999;
+        font-weight: 300;
         margin: 0;
+        color: #666;
+        line-height: 1.4;
     }
 
     /* Menu styles */
     .menu-bar {
-        margin-top: 3rem;
+        margin-top: 0.75rem;
     }
 
     .menu-bar ul {
@@ -293,19 +273,21 @@
         text-decoration: none;
         font-size: 1.1rem;
         font-weight: 300;
-        transition: color 0.3s ease;
+        transition: all 0.3s ease;
         text-transform: uppercase;
         letter-spacing: 1px;
+        display: inline-block;
     }
 
     .menu-bar a:hover {
         color: #666;
+        transform: translateX(10px);
     }
 
     .social-links {
         display: flex;
         gap: 2rem;
-        margin-top: 3rem;
+        margin-top: 0.75rem;
     }
 
     .social-links a {
@@ -328,7 +310,7 @@
     }
 
     section {
-        padding: 4rem 0;
+        padding: 2rem 0;
         opacity: 0;
         transform: translateY(20px);
         transition: opacity 0.8s ease, transform 0.8s ease;
@@ -346,20 +328,25 @@
 
     /* Hero section */
     .hero {
-        min-height: 60vh;
+        min-height: 61.8vh;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         background-color: #fff;
+        padding-top: 0;
     }
 
     .hero-image {
         max-width: 100%;
-        max-height: 60vh;
+        max-height: 61.8vh;
         object-fit: cover;
     }
 
     /* About section */
+    .about {
+        margin-top: -4rem;
+    }
+
     .about-content {
         max-width: 800px;
         margin: 0 auto;
@@ -375,34 +362,102 @@
         margin-bottom: 2rem;
     }
 
-    .skills {
-        width: 100%;
+    /* Timeline styles */
+    .timeline {
+        position: relative;
+        padding-left: 2rem;
     }
 
-    .skills h3 {
-        margin-bottom: 2rem;
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #eee;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding-bottom: 2rem;
+    }
+
+    .timeline-item:last-child {
+        padding-bottom: 0;
+    }
+
+    .timeline-year {
+        position: absolute;
+        left: -2.5rem;
+        background-color: #fff;
+        padding: 0.5rem;
+        font-weight: 500;
+        color: #000;
+    }
+
+    .timeline-content {
+        padding-left: 1rem;
+    }
+
+    .timeline-content h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .timeline-content p {
+        margin: 0;
+        color: #666;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Experience section */
+    .experience-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .experience-item {
+        margin-bottom: 3rem;
+    }
+
+    .experience-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .experience-item h3 {
         font-size: 1.4rem;
+        margin: 0 0 0.5rem 0;
+        font-weight: 500;
     }
 
-    .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 1.5rem;
+    .experience-item .company {
+        font-size: 1.1rem;
+        color: #666;
+        margin: 0 0 0.25rem 0;
     }
 
-    .skill-item {
-        background-color: #f8f8f8;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0;
-        text-align: center;
-        transition: all 0.3s ease;
-        border: 1px solid #eee;
+    .experience-item .period {
+        font-size: 0.9rem;
+        color: #999;
+        margin: 0 0 1rem 0;
     }
 
-    .skill-item:hover {
-        transform: translateY(-3px);
-        background-color: #000;
-        color: #fff;
+    .experience-item ul {
+        margin: 0;
+        padding-left: 1.5rem;
+    }
+
+    .experience-item li {
+        color: #333;
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+    }
+
+    .experience-item li:last-child {
+        margin-bottom: 0;
     }
 
     /* Projects section */
@@ -453,78 +508,6 @@
         padding: 0.5rem 1rem;
         border-radius: 0;
         font-size: 0.875rem;
-        border: 1px solid #eee;
-    }
-
-    /* Contact section */
-    .contact-content {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .form-group {
-        margin-bottom: 2rem;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 0.75rem;
-        font-weight: 400;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    input,
-    textarea {
-        width: 100%;
-        padding: 1rem;
-        border: 1px solid #eee;
-        border-radius: 0;
-        font-size: 1rem;
-        transition: border-color 0.3s ease;
-    }
-
-    input:focus,
-    textarea:focus {
-        outline: none;
-        border-color: #000;
-    }
-
-    textarea {
-        min-height: 200px;
-        resize: vertical;
-    }
-
-    button {
-        background-color: #000;
-        color: #fff;
-        padding: 1rem 2rem;
-        border: none;
-        border-radius: 0;
-        cursor: pointer;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    button:hover:not(:disabled) {
-        background-color: #333;
-    }
-
-    button:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-    }
-
-    .success-message {
-        margin-top: 1.5rem;
-        padding: 1.5rem;
-        background-color: #f8f8f8;
-        color: #000;
-        border-radius: 0;
-        text-align: center;
         border: 1px solid #eee;
     }
 
