@@ -8,6 +8,7 @@
     let message = '';
     let isSubmitting = false;
     let submitSuccess = false;
+    let showScrollArrow = false;
     
     const projects = [
         {
@@ -32,13 +33,17 @@
     
     // Intersection Observer for animations
     let sections: HTMLElement[] = [];
+    let menuElement: HTMLElement;
     let visibleSections: boolean[] = [false, false, false, false];
+    let isMenuVisible = false;
+    let isMenuFadedIn = false;
     
     function scrollToSection(event: MouseEvent, sectionId: string) {
         event.preventDefault();
         const section = document.getElementById(sectionId);
         if (section) {
             section.scrollIntoView({ behavior: 'smooth' });
+            showScrollArrow = true;
         }
     }
     
@@ -59,14 +64,34 @@
             submitSuccess = false;
         }, 3000);
     }
+
+    // Function to scroll smoothly to the top
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        showScrollArrow = false;
+    }
+
+    // Function to handle scroll events
+    function handleScroll() {
+        // Show arrow when scrolled down more than 100px
+        showScrollArrow = window.scrollY > 100;
+    }
     
     onMount(() => {
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll);
+        
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
-                    const index = sections.indexOf(entry.target as HTMLElement);
-                    if (index !== -1) {
-                        visibleSections[index] = entry.isIntersecting;
+                    if (entry.target === menuElement) {
+                        isMenuVisible = entry.isIntersecting;
+                        isMenuFadedIn = true;
+                    } else {
+                        const index = sections.indexOf(entry.target as HTMLElement);
+                        if (index !== -1) {
+                            visibleSections[index] = entry.isIntersecting;
+                        }
                     }
                 });
             },
@@ -74,9 +99,13 @@
         );
         
         sections.forEach((section: HTMLElement) => observer.observe(section));
+        if (menuElement) observer.observe(menuElement);
         
         return () => {
+            // Clean up scroll event listener
+            window.removeEventListener('scroll', handleScroll);
             sections.forEach((section: HTMLElement) => observer.unobserve(section));
+            if (menuElement) observer.unobserve(menuElement);
         };
     });
 </script>
@@ -89,7 +118,7 @@
 
 <div class="layout">
     <main class="main-content">
-        <nav class="menu-bar">
+        <nav class="menu-bar" bind:this={menuElement} class:visible={isMenuFadedIn}>
             <ul>
                 <li><a href="#about-section" on:click={(e) => scrollToSection(e, 'about-section')}>About</a></li>
                 <li><a href="#projects-section" on:click={(e) => scrollToSection(e, 'projects-section')}>Projects</a></li>
@@ -106,7 +135,8 @@
                     <div class="social-links">
                         <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
                         <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://youtube.com/@yourusername" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
             </div>
@@ -198,6 +228,30 @@
             </div>
         </section>
     </main>
+
+    {#if isMenuVisible && showScrollArrow}
+        <button 
+            class="scroll-top-button" 
+            on:click={scrollToTop} 
+            aria-label="Scroll to top"
+            transition:fade={{ duration: 800 }}
+        >
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 14 106"
+                width="14"
+                height="106"
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="1" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"
+                class="arrow-svg"
+            >
+                <path d="M 7 105 L 7 1 M 0 11 L 7 1 L 14 11"></path>
+            </svg>
+        </button>
+    {/if}
 </div>
 
 <style>
@@ -226,10 +280,17 @@
     /* Menu styles */
     .menu-bar {
         position: fixed;
-        top: 50%;
+        top: 40%;
         right: 10%;
-        transform: translateY(-50%);
         z-index: 1000;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .menu-bar.visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .menu-bar ul {
@@ -327,8 +388,10 @@
     }
 
     /* About section */
-    .about {
-        margin-top: 2rem;
+    .about h2 {
+        margin-left: 12rem;
+        margin-bottom: 2rem;
+        font-size: 3rem;
     }
 
     .about-content {
@@ -410,6 +473,12 @@
     }
 
     /* Projects section */
+    .projects h2 {
+        margin-left: 12rem;
+        margin-bottom: 2rem;
+        font-size: 3rem;
+    }
+
     .project-grid {
         display: grid;
         grid-template-columns: 1fr;
@@ -461,6 +530,12 @@
     }
 
     /* Contact section */
+    .contact h2 {
+        margin-left: 12rem;
+        margin-bottom: 2rem;
+        font-size: 3rem;
+    }
+
     .contact-content {
         max-width: 600px;
         margin: 0 0 0 12rem;
@@ -517,6 +592,36 @@
         color: #006600;
         border-radius: 4px;
         text-align: center;
+    }
+
+    /* Scroll-to-top button styles */
+    .scroll-top-button {
+        position: fixed;
+        top: 50%;
+        right: 2rem;
+        transform: translate(50%, -50%);
+        background-color: white;
+        color: black;
+        border: none;
+        border-radius: 0;
+        width: auto;
+        height: auto;
+        padding: 10px 3px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        box-shadow: none;
+    }
+
+    .scroll-top-button:hover {
+        background-color: white;
+        color: #555;
+    }
+
+    .scroll-top-button .arrow-svg {
+        display: block;
     }
 
     /* Responsive design */
