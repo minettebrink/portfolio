@@ -43,7 +43,7 @@
 
 <div class="project-page">
     <nav class="home-link">
-        <a href="/projects">Projects</a>
+        <a href="/#projects-section">Projects</a>
     </nav>
 
     {#if project}
@@ -60,7 +60,7 @@
         <section class="error-section">
             <h1>Project Not Found</h1>
             <p>The project you're looking for doesn't exist.</p>
-            <a href="/projects" class="back-link">Back to Projects</a>
+            <a href="/#projects-section" class="back-link">Back to Projects</a>
         </section>
     {/if}
 </div>
