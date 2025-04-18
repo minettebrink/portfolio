@@ -606,7 +606,7 @@
         border-radius: 0;
         width: auto;
         height: auto;
-        padding: 10px 3px;
+        padding: 20px 20px;
         cursor: pointer;
         display: flex;
         align-items: center;
