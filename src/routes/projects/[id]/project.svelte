@@ -48,19 +48,19 @@
 
     {#if project}
         <section class="project-section">
-            <h1>{project.title}</h1>
-            <div class="technologies">
+            <h1 class="name" style="margin-left: 12rem;">{project.title}</h1>
+            <div class="technologies" style="margin-left: 12rem;">
                 {#each project.technologies as tech}
                     <span class="tech-tag">{tech}</span>
                 {/each}
             </div>
-            <p class="description">{project.description}</p>
+            <p class="description" style="margin-left: 12rem;">{project.description}</p>
         </section>
     {:else}
         <section class="error-section">
-            <h1>Project Not Found</h1>
-            <p>The project you're looking for doesn't exist.</p>
-            <a href="/#projects-section" class="back-link">Back to Projects</a>
+            <h1 class="name" style="margin-left: 12rem;">Project Not Found</h1>
+            <p style="margin-left: 12rem;">The project you're looking for doesn't exist.</p>
+            <a href="/#projects-section" class="back-link" style="margin-left: 12rem;">Back to Projects</a>
         </section>
     {/if}
 </div>
@@ -107,18 +107,18 @@
         margin-top: 2rem;
     }
 
-    h1 {
+    .name {
         font-size: 3rem;
-        margin-bottom: 2rem;
-        font-weight: 500;
-        letter-spacing: -0.5px;
+        font-weight: 300;
+        margin: 0;
+        line-height: 1.2;
     }
 
     .technologies {
         display: flex;
         flex-wrap: wrap;
         gap: 0.75rem;
-        margin-bottom: 2rem;
+        margin: 2rem 0;
     }
 
     .tech-tag {
@@ -133,10 +133,11 @@
         font-size: 1.2rem;
         line-height: 1.8;
         color: #333;
+        max-width: 800px;
     }
 
     .error-section {
-        text-align: center;
+        text-align: left;
     }
 
     .back-link {
@@ -159,7 +160,7 @@
             padding: 3rem 1rem;
         }
 
-        h1 {
+        .name {
             font-size: 2.5rem;
         }
 

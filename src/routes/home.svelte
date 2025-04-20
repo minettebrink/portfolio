@@ -199,32 +199,27 @@
         <section id="contact-section" class="contact" bind:this={sections[3]} class:visible={visibleSections[3]}>
             <h2>Contact Me</h2>
             <div class="contact-content">
-                <form on:submit|preventDefault={handleSubmit}>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" bind:value={name} required />
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" bind:value={email} required />
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" bind:value={message} required></textarea>
-                    </div>
-                    <button type="submit" disabled={isSubmitting}>
-                        {#if isSubmitting}
-                            Sending...
-                        {:else}
-                            Send Message
-                        {/if}
-                    </button>
-                </form>
-                {#if submitSuccess}
-                    <div class="success-message" transition:fade>
-                        Thank you for your message! I'll get back to you soon.
-                    </div>
-                {/if}
+                <p class="contact-intro">
+                    I'd love to hear from you! Feel free to reach out through any of these channels:
+                </p>
+                
+                <div class="contact-options">
+                    <a href="mailto:your.email@example.com" class="contact-option">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>your.email@example.com</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" class="contact-option">
+                        <i class="fab fa-linkedin"></i>
+                        <div class="contact-details">
+                            <h3>LinkedIn</h3>
+                            <p>Connect with me on LinkedIn</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </section>
     </main>
@@ -280,7 +275,7 @@
     /* Menu styles */
     .menu-bar {
         position: fixed;
-        top: 40%;
+        top: 45%;
         right: 10%;
         z-index: 1000;
         opacity: 0;
@@ -395,7 +390,7 @@
     }
 
     .about-content {
-        max-width: 800px;
+        max-width: 1000px;
         margin: 0 0 0 12rem;
         display: flex;
         gap: 4rem;
@@ -463,13 +458,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 400;
     }
 
     .profile-image {
         max-width: 300px;
-        height: auto;
-        border-radius: 4px;
+        height: 350px;
+        border-radius: 0;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
     }
 
     /* Projects section */
@@ -485,6 +482,7 @@
         gap: 3rem;
         max-width: 800px;
         margin: 0 0 0 12rem;
+        padding-bottom: 4rem;
     }
 
     .project-card {
@@ -539,59 +537,42 @@
     .contact-content {
         max-width: 600px;
         margin: 0 0 0 12rem;
+        padding-bottom: 16rem;
     }
 
-    .form-group {
-        margin-bottom: 1.5rem;
+    .contact-intro {
+        margin-bottom: 2rem;
     }
 
-    label {
-        display: block;
+    .contact-options {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .contact-option {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .contact-option:hover {
+        color: #666;
+    }
+
+    .contact-details {
+        text-align: left;
+    }
+
+    .contact-details h3 {
+        font-size: 1.5rem;
         margin-bottom: 0.5rem;
-        font-size: 1rem;
-        color: #333;
     }
 
-    input, textarea {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 1rem;
-        font-family: inherit;
-    }
-
-    textarea {
-        min-height: 150px;
-        resize: vertical;
-    }
-
-    button {
-        background-color: #000;
-        color: #fff;
-        border: none;
-        padding: 1rem 2rem;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #333;
-    }
-
-    button:disabled {
-        background-color: #666;
-        cursor: not-allowed;
-    }
-
-    .success-message {
-        margin-top: 1rem;
-        padding: 1rem;
-        background-color: #e6ffe6;
-        color: #006600;
-        border-radius: 4px;
-        text-align: center;
+    .contact-details p {
+        font-size: 1.2rem;
+        margin: 0;
     }
 
     /* Scroll-to-top button styles */
@@ -679,6 +660,15 @@
 
         .profile-image {
             max-width: 250px;
+        }
+
+        .contact-options {
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-option {
+            width: 100%;
         }
     }
 </style> 
