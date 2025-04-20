@@ -133,10 +133,10 @@
                     <h2 class="title">Developer Advocate</h2>
                     
                     <div class="social-links">
-                        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)"><i class="fab fa-x-twitter"></i></a>
-                        <a href="https://youtube.com/@yourusername" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://github.com/minettebrink" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/minette-kaunism%C3%A4ki-8b138b166/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://x.com/MinetteKaum" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://www.youtube.com/@minettebrink557" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
             </div>
@@ -152,24 +152,41 @@
                     </p>
                     <div class="experience-content">
                         <div class="experience-item">
-                            <h3>Developer Advocate</h3>
-                            <p class="company">Company Name</p>
-                            <p class="period">2023 - Present</p>
+                            <h3>Data Scientist</h3>
+                            <p class="company">Intrum</p>
+                            <p class="period">2023 - 2024</p>
                             <ul>
-                                <li>Led developer community engagement initiatives</li>
-                                <li>Created technical content and documentation</li>
-                                <li>Organized and spoke at developer events</li>
+                                <li>Used machine learning models to predict credit risk</li>
+                                <li>Used LLMs to automaise business processes</li>
+                                <li>Part of the team to improve LMOPs</li>
                             </ul>
                         </div>
                         <div class="experience-item">
-                            <h3>Senior Developer</h3>
-                            <p class="company">Previous Company</p>
+                            <h3>Graduate Analyste</h3>
+                            <p class="company">Intrum</p>
                             <p class="period">2022 - 2023</p>
                             <ul>
-                                <li>Led development of multiple web applications</li>
-                                <li>Mentored junior developers</li>
-                                <li>Implemented modern development practices</li>
+                                <li>Used SQL to query and analyse investment potfolios</li>
+                                <li>Part of the project that predict credit risk</li>
                             </ul>
+                        </div>
+                        <div class="experience-item">
+                            <h3>E-learning Professional</h3>
+                            <p class="company">Metso</p>
+                            <p class="period">Summer 2018 & 2019</p>
+                            <ul>
+                                <li>Developed e-learning progam for the finance department</li>
+                            </ul>
+                        </div>
+                        <div class="experience-item">
+                            <h3>MSc Applied Mathematics</h3>
+                            <p class="company">Åbo Akademi University </p>
+                            <p class="period">2019 - 2022</p>
+                        </div>
+                        <div class="experience-item">
+                            <h3>MSc Pedagogics</h3>
+                            <p class="company">Åbo Akademi University </p>
+                            <p class="period">2014 - 2020</p>
                         </div>
                     </div>
                 </div>
@@ -200,23 +217,23 @@
             <h2>Contact Me</h2>
             <div class="contact-content">
                 <p class="contact-intro">
-                    I'd love to hear from you! Feel free to reach out through any of these channels:
+                    If you want to get in touch, feel free to reach out:
                 </p>
                 
                 <div class="contact-options">
-                    <a href="mailto:your.email@example.com" class="contact-option">
+                    <a href="mailto:minette.kaum@gmail.com" class="contact-option">
                         <i class="fas fa-envelope"></i>
                         <div class="contact-details">
                             <h3>Email</h3>
-                            <p>your.email@example.com</p>
+                            <p>minette.kaum@gmail.com</p>
                         </div>
                     </a>
                     
-                    <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" class="contact-option">
+                    <a href="https://www.linkedin.com/in/minette-kaunism%C3%A4ki-8b138b166/" target="_blank" rel="noopener noreferrer" class="contact-option">
                         <i class="fab fa-linkedin"></i>
                         <div class="contact-details">
                             <h3>LinkedIn</h3>
-                            <p>Connect with me on LinkedIn</p>
+                            <p>Send me a message</p>
                         </div>
                     </a>
                 </div>
