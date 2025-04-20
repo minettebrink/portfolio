@@ -41,28 +41,30 @@
     <meta name="description" content={project ? project.description : 'Project not found'} />
 </svelte:head>
 
-<div class="project-page">
-    <nav class="home-link">
-        <a href="/#projects-section">Projects</a>
-    </nav>
+<div class="layout">
+    <div class="project-page">
+        <nav class="home-link">
+            <a href="/#projects-section">Projects</a>
+        </nav>
 
-    {#if project}
-        <section class="project-section">
-            <h1 class="name" style="margin-left: 12rem;">{project.title}</h1>
-            <div class="technologies" style="margin-left: 12rem;">
-                {#each project.technologies as tech}
-                    <span class="tech-tag">{tech}</span>
-                {/each}
-            </div>
-            <p class="description" style="margin-left: 12rem;">{project.description}</p>
-        </section>
-    {:else}
-        <section class="error-section">
-            <h1 class="name" style="margin-left: 12rem;">Project Not Found</h1>
-            <p style="margin-left: 12rem;">The project you're looking for doesn't exist.</p>
-            <a href="/#projects-section" class="back-link" style="margin-left: 12rem;">Back to Projects</a>
-        </section>
-    {/if}
+        {#if project}
+            <section class="project-section">
+                <h1 class="name" style="margin-left: 12rem;">{project.title}</h1>
+                <div class="technologies" style="margin-left: 12rem;">
+                    {#each project.technologies as tech}
+                        <span class="tech-tag">{tech}</span>
+                    {/each}
+                </div>
+                <p class="description" style="margin-left: 12rem;">{project.description}</p>
+            </section>
+        {:else}
+            <section class="error-section">
+                <h1 class="name" style="margin-left: 12rem;">Project Not Found</h1>
+                <p style="margin-left: 12rem;">The project you're looking for doesn't exist.</p>
+                <a href="/#projects-section" class="back-link" style="margin-left: 12rem;">Back to Projects</a>
+            </section>
+        {/if}
+    </div>
 </div>
 
 <style>
@@ -75,6 +77,14 @@
         background-color: #fff;
     }
 
+    .layout {
+        min-height: 100vh;
+        position: relative;
+        border: 1px solid black;
+        margin: 2rem;
+        padding: 0;
+    }
+
     .project-page {
         padding: 4rem 2rem;
         max-width: 1200px;
@@ -84,8 +94,8 @@
 
     .home-link {
         position: absolute;
-        top: 2rem;
-        right: 2rem;
+        top: 6rem;
+        right: 1rem;
     }
 
     .home-link a {
