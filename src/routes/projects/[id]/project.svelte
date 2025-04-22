@@ -1,34 +1,16 @@
 <script lang="ts">
     import { page } from '$app/stores';
+    import { projects } from '$lib/data/projects';
+    import { marked } from 'marked';
     
     // Get the project ID from the URL
     const projectId = $page.params.id;
     
-    // This would typically come from a database or API
-    // For now, we'll use the same projects data from home.svelte
-    const projects = [
-        {
-            id: 'video-generator',
-            title: 'Video Generator',
-            description: 'Description of your first project goes here.',
-            technologies: ['Svelte', 'TypeScript', 'TailwindCSS']
-        },
-        {
-            id: 'project-2',
-            title: 'Project 2',
-            description: 'Description of your second project goes here.',
-            technologies: ['React', 'Node.js', 'MongoDB']
-        },
-        {
-            id: 'project-3',
-            title: 'Project 3',
-            description: 'Description of your third project goes here.',
-            technologies: ['Vue.js', 'Firebase', 'SCSS']
-        }
-    ];
-    
     // Find the current project
     const project = projects.find(p => p.id === projectId);
+    
+    // Convert markdown content to HTML
+    $: projectContent = project ? marked(project.content) : '';
 
     function scrollToProjects(event: MouseEvent) {
         event.preventDefault();
@@ -49,19 +31,46 @@
 
         {#if project}
             <section class="project-section">
-                <h1 class="name" style="margin-left: 12rem;">{project.title}</h1>
-                <div class="technologies" style="margin-left: 12rem;">
+                <h1 class="name">{project.title}</h1>
+                <div class="technologies">
                     {#each project.technologies as tech}
                         <span class="tech-tag">{tech}</span>
                     {/each}
                 </div>
-                <p class="description" style="margin-left: 12rem;">{project.description}</p>
+                
+                <div class="project-meta">
+                    <span class="date">{new Date(project.date).toLocaleDateString()}</span>
+                    {#if project.tags}
+                        <div class="tags">
+                            {#each project.tags as tag}
+                                <span class="tag">#{tag}</span>
+                            {/each}
+                        </div>
+                    {/if}
+                </div>
+
+                <div class="content">
+                    {@html projectContent}
+                </div>
+
+                <div class="project-links">
+                    {#if project.githubUrl}
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="project-link">
+                            View on GitHub
+                        </a>
+                    {/if}
+                    {#if project.liveUrl}
+                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="project-link">
+                            Live Demo
+                        </a>
+                    {/if}
+                </div>
             </section>
         {:else}
             <section class="error-section">
-                <h1 class="name" style="margin-left: 12rem;">Project Not Found</h1>
-                <p style="margin-left: 12rem;">The project you're looking for doesn't exist.</p>
-                <a href="/#projects-section" class="back-link" style="margin-left: 12rem;">Back to Projects</a>
+                <h1 class="name">Project Not Found</h1>
+                <p>The project you're looking for doesn't exist.</p>
+                <a href="/#projects-section" class="back-link">Back to Projects</a>
             </section>
         {/if}
     </div>
@@ -115,6 +124,7 @@
 
     section {
         margin-top: 2rem;
+        padding: 0 12rem;
     }
 
     .name {
@@ -137,13 +147,6 @@
         border-radius: 0;
         font-size: 0.875rem;
         border: 1px solid #eee;
-    }
-
-    .description {
-        font-size: 1.2rem;
-        line-height: 1.8;
-        color: #333;
-        max-width: 800px;
     }
 
     .error-section {
@@ -173,9 +176,93 @@
         .name {
             font-size: 2.5rem;
         }
-
-        .description {
-            font-size: 1.1rem;
+        
+        section {
+            padding: 0 2rem;
         }
     }
+
+    .project-meta {
+        margin: 1rem 0 2rem;
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .date {
+        margin-right: 1rem;
+    }
+
+    .tags {
+        display: inline-flex;
+        gap: 0.5rem;
+    }
+
+    .tag {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .content {
+        margin-top: 2rem;
+    }
+
+    .content :global(h1) {
+        font-size: 2rem;
+        margin: 2rem 0 1rem;
+    }
+
+    .content :global(h2) {
+        font-size: 1.5rem;
+        margin: 1.5rem 0 1rem;
+    }
+
+    .content :global(p) {
+        margin: 1rem 0;
+        line-height: 1.8;
+    }
+
+    .content :global(ul), .content :global(ol) {
+        margin: 1rem 0;
+        padding-left: 2rem;
+    }
+
+    .content :global(li) {
+        margin: 0.5rem 0;
+    }
+
+    .project-links {
+        margin-top: 3rem;
+        display: flex;
+        gap: 1rem;
+    }
+
+    .project-link {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: #000;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .project-link:hover {
+        background-color: #333;
+    }
+
+    @media (max-width: 768px) {
+        .project-meta {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .project-links {
+            flex-direction: column;
+        }
+
+        .project-link {
+            text-align: center;
+        }
+    }
+
 </style> 

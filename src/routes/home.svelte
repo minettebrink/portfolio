@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { fade } from 'svelte/transition';
+    import { projects } from '$lib/data/projects';
     
     let isMenuOpen = false;
     let name = '';
@@ -9,27 +10,7 @@
     let isSubmitting = false;
     let submitSuccess = false;
     let showScrollArrow = false;
-    
-    const projects = [
-        {
-            id: 'video-generator',
-            title: 'Video Generator',
-            description: 'Description of your first project goes here.',
-            technologies: ['Svelte', 'TypeScript', 'TailwindCSS']
-        },
-        {
-            id: 'project-2',
-            title: 'Project 2',
-            description: 'Description of your second project goes here.',
-            technologies: ['React', 'Node.js', 'MongoDB']
-        },
-        {
-            id: 'project-3',
-            title: 'Project 3',
-            description: 'Description of your third project goes here.',
-            technologies: ['Vue.js', 'Firebase', 'SCSS']
-        }
-    ];
+    let isDarkMode = false;
     
     // Intersection Observer for animations
     let sections: HTMLElement[] = [];
@@ -37,6 +18,12 @@
     let visibleSections: boolean[] = [false, false, false, false];
     let isMenuVisible = false;
     let isMenuFadedIn = false;
+    
+    function toggleDarkMode() {
+        isDarkMode = !isDarkMode;
+        document.documentElement.classList.toggle('dark-mode', isDarkMode);
+        document.body.classList.toggle('dark-mode', isDarkMode);
+    }
     
     function scrollToSection(event: MouseEvent, sectionId: string) {
         event.preventDefault();
@@ -116,7 +103,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </svelte:head>
 
-<div class="layout">
+<div class="layout" class:dark-mode={isDarkMode}>
+    <button class="theme-toggle" on:click={toggleDarkMode} aria-label="Toggle dark mode">
+        <i class="fas" class:fa-sun={isDarkMode} class:fa-moon={!isDarkMode}></i>
+    </button>
     <main class="main-content">
         <nav class="menu-bar" bind:this={menuElement} class:visible={isMenuFadedIn}>
             <ul>
@@ -275,6 +265,165 @@
         color: #000;
         background-color: #fff;
         scroll-behavior: smooth;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    :global(html) {
+        background-color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+    :global(html.dark-mode),
+    :global(body.dark-mode) {
+        background-color: #1a1a1a;
+        color: #fff;
+    }
+
+    .layout {
+        min-height: 100vh;
+        position: relative;
+        border: 1px solid black;
+        margin: 2rem;
+        padding: 0;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .layout.dark-mode {
+        border-color: #fff;
+        background-color: #1a1a1a;
+    }
+
+    /* Hero section */
+    .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 2rem;
+        background-color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+    .dark-mode .hero {
+        background-color: #1a1a1a;
+    }
+
+    /* About section */
+    .about {
+        background-color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+    .dark-mode .about {
+        background-color: #1a1a1a;
+    }
+
+    /* Projects section */
+    .projects {
+        background-color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+    .dark-mode .projects {
+        background-color: #1a1a1a;
+    }
+
+    /* Contact section */
+    .contact {
+        background-color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+    .dark-mode .contact {
+        background-color: #1a1a1a;
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        background: none;
+        border: none;
+        color: inherit;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 1000;
+        transition: transform 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+        transform: scale(1.1);
+    }
+
+    /* Dark mode styles */
+    .dark-mode .menu-bar a {
+        color: #fff;
+    }
+
+    .dark-mode .menu-bar a:hover {
+        color: #ccc;
+    }
+
+    .dark-mode .title {
+        color: #ccc;
+    }
+
+    .dark-mode .social-links a {
+        color: #fff;
+    }
+
+    .dark-mode .social-links a:hover {
+        color: #ccc;
+    }
+
+    .dark-mode .about-text p {
+        color: #ccc;
+    }
+
+    .dark-mode .experience-item h3 {
+        color: #fff;
+    }
+
+    .dark-mode .experience-item .company {
+        color: #ccc;
+    }
+
+    .dark-mode .experience-item .period {
+        color: #999;
+    }
+
+    .dark-mode .experience-item li {
+        color: #ccc;
+    }
+
+    .dark-mode .project-card {
+        background-color: #2a2a2a;
+        border-color: #333;
+    }
+
+    .dark-mode .project-card:hover {
+        border-color: #fff;
+    }
+
+    .dark-mode .project-card p {
+        color: #ccc;
+    }
+
+    .dark-mode .tech-tag {
+        background-color: #333;
+        border-color: #444;
+        color: #fff;
+    }
+
+    .dark-mode .scroll-top-button {
+        background-color: #2a2a2a;
+        color: #fff;
+    }
+
+    .dark-mode .scroll-top-button:hover {
+        background-color: #333;
+        color: #ccc;
     }
 
     .layout {
@@ -329,15 +478,6 @@
     .menu-bar a:hover {
         color: #666;
         transform: translateX(-20px);
-    }
-
-    /* Hero section */
-    .hero {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        padding: 2rem;
-        background-color: #fff;
     }
 
     .hero-content {
@@ -399,7 +539,6 @@
         letter-spacing: -0.5px;
     }
 
-    /* About section */
     .about h2 {
         margin-left: 12rem;
         margin-bottom: 2rem;
@@ -486,7 +625,6 @@
         object-fit: cover;
     }
 
-    /* Projects section */
     .projects h2 {
         margin-left: 12rem;
         margin-bottom: 2rem;
@@ -544,7 +682,6 @@
         border: 1px solid #eee;
     }
 
-    /* Contact section */
     .contact h2 {
         margin-left: 12rem;
         margin-bottom: 2rem;
@@ -598,7 +735,7 @@
         top: 50%;
         right: 2rem;
         transform: translate(50%, -50%);
-        background-color: white;
+        background-color: #fff;
         color: black;
         border: none;
         border-radius: 0;
@@ -611,11 +748,22 @@
         justify-content: center;
         z-index: 1000;
         box-shadow: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .scroll-top-button:hover {
-        background-color: white;
+        background-color: #fff;
         color: #555;
+    }
+
+    .dark-mode .scroll-top-button {
+        background-color: #1a1a1a;
+        color: #fff;
+    }
+
+    .dark-mode .scroll-top-button:hover {
+        background-color: #1a1a1a;
+        color: #ccc;
     }
 
     .scroll-top-button .arrow-svg {

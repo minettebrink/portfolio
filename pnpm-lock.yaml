@@ -11,6 +11,9 @@ importers:
       '@fortawesome/fontawesome-free':
         specifier: ^6.7.2
         version: 6.7.2
+      marked:
+        specifier: ^15.0.9
+        version: 15.0.9
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^4.0.0
@@ -436,6 +439,11 @@ packages:
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
 
+  marked@15.0.9:
+    resolution: {integrity: sha512-9AW/bn9DxQeZVjR52l5jsc0W2pwuhP04QaQewPvylil12Cfr2GBfWmgp6mu8i9Jy8UlBjqDZ9uMTDuJ8QOGZJA==}
+    engines: {node: '>= 18'}
+    hasBin: true
+
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -854,6 +862,8 @@ snapshots:
   magic-string@0.30.17:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  marked@15.0.9: {}
 
   mri@1.2.0: {}
 
