@@ -135,7 +135,7 @@
             <div class="about-content">
                 <div class="about-text">
                     <p>
-                        Hello! I'm a web developer with a passion for creating beautiful and functional websites. 
+                        Hello! I'm a web developer passionate about creating beautiful and functional websites. 
                         I love learning new technologies and solving complex problems.
                     </p>
                     <div class="experience-content">
@@ -145,8 +145,8 @@
                             <p class="period">2023 - 2024</p>
                             <ul>
                                 <li>Used machine learning models to predict credit risk</li>
-                                <li>Used LLMs to automaise business processes</li>
-                                <li>Part of the team to improve LMOPs</li>
+                                <li>Used LLMs to automatise business processes</li>
+                                <li>Part of the team to improve LMOPS </li>
                             </ul>
                         </div>
                         <div class="experience-item">
@@ -154,8 +154,8 @@
                             <p class="company">Intrum</p>
                             <p class="period">2022 - 2023</p>
                             <ul>
-                                <li>Used SQL to query and analyse investment potfolios</li>
-                                <li>Part of the project that predict credit risk</li>
+                                <li>Used SQL to query and analyse investment portfolios </li>
+                                <li>Part of the project that predicts credit risk</li>
                             </ul>
                         </div>
                         <div class="experience-item">
@@ -163,7 +163,7 @@
                             <p class="company">Metso</p>
                             <p class="period">Summer 2018 & 2019</p>
                             <ul>
-                                <li>Developed e-learning progam for the finance department</li>
+                                <li>Developed e-learning program for the finance department</li>
                             </ul>
                         </div>
                         <div class="experience-item">
