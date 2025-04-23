@@ -163,8 +163,8 @@
 
     .home-link {
         position: fixed;
-        top: 6rem;
-        left: 6rem;
+        top: 3rem;
+        left: 4rem;
     }
 
     .home-link a {
