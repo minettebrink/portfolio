@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import { fade } from 'svelte/transition';
     import { projects } from '$lib/data/projects';
+    import { isDarkMode } from '$lib/stores/theme';
     
     let isMenuOpen = false;
     let name = '';
@@ -10,7 +11,6 @@
     let isSubmitting = false;
     let submitSuccess = false;
     let showScrollArrow = false;
-    let isDarkMode = false;
     
     // Intersection Observer for animations
     let sections: HTMLElement[] = [];
@@ -20,9 +20,7 @@
     let isMenuFadedIn = false;
     
     function toggleDarkMode() {
-        isDarkMode = !isDarkMode;
-        document.documentElement.classList.toggle('dark-mode', isDarkMode);
-        document.body.classList.toggle('dark-mode', isDarkMode);
+        $isDarkMode = !$isDarkMode;
     }
     
     function scrollToSection(event: MouseEvent, sectionId: string) {
@@ -103,9 +101,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </svelte:head>
 
-<div class="layout" class:dark-mode={isDarkMode}>
+<div class="layout" class:dark-mode={$isDarkMode}>
     <button class="theme-toggle" on:click={toggleDarkMode} aria-label="Toggle dark mode">
-        <i class="fas" class:fa-sun={isDarkMode} class:fa-moon={!isDarkMode}></i>
+        <i class="fa-solid" class:fa-sun={$isDarkMode} class:fa-moon={!$isDarkMode}></i>
     </button>
     <main class="main-content">
         <nav class="menu-bar" bind:this={menuElement} class:visible={isMenuFadedIn}>
@@ -340,20 +338,25 @@
     /* Theme toggle button */
     .theme-toggle {
         position: fixed;
-        top: 2rem;
+        top: 3rem;
         right: 2rem;
-        background: none;
+        background: #fff;
         border: none;
         color: inherit;
         font-size: 1.5rem;
         cursor: pointer;
-        padding: 0.5rem;
+        padding: 0.5rem 0rem;
         z-index: 1000;
-        transition: transform 0.3s ease;
+        transition: color 0.3s ease, background-color 0.3s ease;
+        transform: translateX(50%);
+    }
+
+    .dark-mode .theme-toggle {
+        background: #1a1a1a;
     }
 
     .theme-toggle:hover {
-        transform: scale(1.1);
+        color: #666;
     }
 
     /* Dark mode styles */

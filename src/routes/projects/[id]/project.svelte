@@ -2,6 +2,8 @@
     import { page } from '$app/stores';
     import { projects } from '$lib/data/projects';
     import { marked } from 'marked';
+    import { isDarkMode } from '$lib/stores/theme';
+    import { fade } from 'svelte/transition';
     
     // Get the project ID from the URL
     const projectId = $page.params.id;
@@ -12,18 +14,45 @@
     // Convert markdown content to HTML
     $: projectContent = project ? marked(project.content) : '';
 
+    let showScrollArrow = false;
+
     function scrollToProjects(event: MouseEvent) {
         event.preventDefault();
         window.location.href = '/#projects-section';
+    }
+
+    function toggleDarkMode() {
+        $isDarkMode = !$isDarkMode;
+    }
+
+    // Function to scroll smoothly to the top
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        showScrollArrow = false;
+    }
+
+    // Function to handle scroll events
+    function handleScroll() {
+        // Show arrow when scrolled down more than 100px
+        showScrollArrow = window.scrollY > 100;
+    }
+
+    // Add scroll event listener when component mounts
+    if (typeof window !== 'undefined') {
+        window.addEventListener('scroll', handleScroll);
     }
 </script>
 
 <svelte:head>
     <title>{project ? project.title : 'Project Not Found'} - Minette Kaunismäki</title>
     <meta name="description" content={project ? project.description : 'Project not found'} />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </svelte:head>
 
-<div class="layout">
+<div class="layout" class:dark-mode={$isDarkMode}>
+    <button class="theme-toggle" on:click={toggleDarkMode} aria-label="Toggle dark mode">
+        <i class="fa-solid" class:fa-sun={$isDarkMode} class:fa-moon={!$isDarkMode}></i>
+    </button>
     <div class="project-page">
         <nav class="home-link">
             <a href="/#projects-section">Projects</a>
@@ -74,6 +103,30 @@
             </section>
         {/if}
     </div>
+
+    {#if showScrollArrow}
+        <button 
+            class="scroll-top-button" 
+            on:click={scrollToTop} 
+            aria-label="Scroll to top"
+            transition:fade={{ duration: 800 }}
+        >
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 14 106"
+                width="14"
+                height="106"
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="1" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"
+                class="arrow-svg"
+            >
+                <path d="M 7 105 L 7 1 M 0 11 L 7 1 L 14 11"></path>
+            </svg>
+        </button>
+    {/if}
 </div>
 
 <style>
@@ -84,6 +137,13 @@
         line-height: 1.6;
         color: #000;
         background-color: #fff;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    :global(html.dark-mode),
+    :global(body.dark-mode) {
+        background-color: #1a1a1a;
+        color: #fff;
     }
 
     .layout {
@@ -92,6 +152,12 @@
         border: 1px solid black;
         margin: 2rem;
         padding: 0;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .layout.dark-mode {
+        border-color: #fff;
+        background-color: #1a1a1a;
     }
 
     .project-page {
@@ -117,9 +183,12 @@
         letter-spacing: 2px;
     }
 
-    .home-link a:hover {
-        color: #666;
-        transform: translateX(-10px);
+    .dark-mode .home-link a {
+        color: #fff;
+    }
+
+    .dark-mode .home-link a:hover {
+        color: #ccc;
     }
 
     section {
@@ -149,6 +218,12 @@
         border: 1px solid #eee;
     }
 
+    .dark-mode .tech-tag {
+        background-color: #2a2a2a;
+        border-color: #333;
+        color: #fff;
+    }
+
     .error-section {
         text-align: left;
     }
@@ -163,9 +238,14 @@
         transition: all 0.3s ease;
     }
 
-    .back-link:hover {
-        color: #666;
-        border-color: #666;
+    .dark-mode .back-link {
+        color: #fff;
+        border-color: #fff;
+    }
+
+    .dark-mode .back-link:hover {
+        color: #ccc;
+        border-color: #ccc;
     }
 
     @media (max-width: 768px) {
@@ -200,6 +280,10 @@
     .tag {
         color: #666;
         font-size: 0.9rem;
+    }
+
+    .dark-mode .tag {
+        color: #ccc;
     }
 
     .content {
@@ -246,8 +330,13 @@
         transition: background-color 0.3s ease;
     }
 
-    .project-link:hover {
-        background-color: #333;
+    .dark-mode .project-link {
+        background-color: #fff;
+        color: #000;
+    }
+
+    .dark-mode .project-link:hover {
+        background-color: #ccc;
     }
 
     @media (max-width: 768px) {
@@ -263,6 +352,71 @@
         .project-link {
             text-align: center;
         }
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+        position: fixed;
+        top: 3rem;
+        right: 2rem;
+        background: #fff;
+        border: none;
+        color: inherit;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem 0rem;
+        z-index: 1000;
+        transition: color 0.3s ease, background-color 0.3s ease;
+        transform: translateX(50%);
+    }
+
+    .dark-mode .theme-toggle {
+        background: #1a1a1a;
+    }
+
+    .theme-toggle:hover {
+        color: #666;
+    }
+
+    /* Scroll-to-top button styles */
+    .scroll-top-button {
+        position: fixed;
+        top: 50%;
+        right: 2rem;
+        transform: translate(50%, -50%);
+        background-color: #fff;
+        color: black;
+        border: none;
+        border-radius: 0;
+        width: auto;
+        height: auto;
+        padding: 20px 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        box-shadow: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .scroll-top-button:hover {
+        background-color: #fff;
+        color: #555;
+    }
+
+    .dark-mode .scroll-top-button {
+        background-color: #1a1a1a;
+        color: #fff;
+    }
+
+    .dark-mode .scroll-top-button:hover {
+        background-color: #1a1a1a;
+        color: #ccc;
+    }
+
+    .scroll-top-button .arrow-svg {
+        display: block;
     }
 
 </style> 
