@@ -55,27 +55,21 @@
     </button>
     <div class="project-page">
         <nav class="home-link">
-            <a href="/#projects-section">Projects</a>
+            <a href="/#projects-section">Back to<br>Projects</a>
         </nav>
 
         {#if project}
             <section class="project-section">
                 <h1 class="name">{project.title}</h1>
+                
+                <div class="project-meta">
+                    <span class="date">{new Date(project.date).toLocaleDateString()}</span>
+                </div>
+                
                 <div class="technologies">
                     {#each project.technologies as tech}
                         <span class="tech-tag">{tech}</span>
                     {/each}
-                </div>
-                
-                <div class="project-meta">
-                    <span class="date">{new Date(project.date).toLocaleDateString()}</span>
-                    {#if project.tags}
-                        <div class="tags">
-                            {#each project.tags as tag}
-                                <span class="tag">#{tag}</span>
-                            {/each}
-                        </div>
-                    {/if}
                 </div>
 
                 <div class="content">
@@ -168,9 +162,9 @@
     }
 
     .home-link {
-        position: absolute;
+        position: fixed;
         top: 6rem;
-        right: 1rem;
+        left: 6rem;
     }
 
     .home-link a {
@@ -270,20 +264,6 @@
 
     .date {
         margin-right: 1rem;
-    }
-
-    .tags {
-        display: inline-flex;
-        gap: 0.5rem;
-    }
-
-    .tag {
-        color: #666;
-        font-size: 0.9rem;
-    }
-
-    .dark-mode .tag {
-        color: #ccc;
     }
 
     .content {
