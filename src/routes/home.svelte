@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import { fade } from 'svelte/transition';
+    import { fade, slide } from 'svelte/transition';
     import { projects } from '$lib/data/projects';
     import { isDarkMode } from '$lib/stores/theme';
     
@@ -11,6 +11,7 @@
     let isSubmitting = false;
     let submitSuccess = false;
     let showScrollArrow = false;
+    let isExperienceOpen = false;
     
     // Intersection Observer for animations
     let sections: HTMLElement[] = [];
@@ -136,50 +137,76 @@
                 <div class="about-text">
                     <p>
                         Hello! I'm a web developer passionate about creating beautiful and functional websites. 
-                        I love learning new technologies and solving complex problems.
+                        I love learning new technologies and solving complex problems. I'm organising AI Tinkerers events in Paris,
+                        meetups and hackathons.
                     </p>
-                    <div class="experience-content">
-                        <div class="experience-item">
-                            <h3>Data Scientist</h3>
-                            <p class="company">Intrum</p>
-                            <p class="period">2023 - 2024</p>
-                            <ul>
-                                <li>Used machine learning models to predict credit risk</li>
-                                <li>Used LLMs to automatise business processes</li>
-                                <li>Part of the team to improve LMOPS </li>
-                            </ul>
+                    <div 
+                        class="experience-box" 
+                        on:click={() => {
+                            isExperienceOpen = !isExperienceOpen;
+                            if (!isExperienceOpen) {
+                                document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
+                        role="button"
+                        tabindex="0"
+                        on:keydown={(e) => {
+                            if (e.key === 'Enter') {
+                                isExperienceOpen = !isExperienceOpen;
+                                if (!isExperienceOpen) {
+                                    document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }
+                        }}
+                    >
+                        <div class="experience-toggle">
+                            <h3 class:invisible={isExperienceOpen}>Experience</h3>
                         </div>
-                        <div class="experience-item">
-                            <h3>Graduate Analyste</h3>
-                            <p class="company">Intrum</p>
-                            <p class="period">2022 - 2023</p>
-                            <ul>
-                                <li>Used SQL to query and analyse investment portfolios </li>
-                                <li>Part of the project that predicts credit risk</li>
-                            </ul>
-                        </div>
-                        <div class="experience-item">
-                            <h3>E-learning Professional</h3>
-                            <p class="company">Metso</p>
-                            <p class="period">Summer 2018 & 2019</p>
-                            <ul>
-                                <li>Developed e-learning program for the finance department</li>
-                            </ul>
-                        </div>
-                        <div class="experience-item">
-                            <h3>MSc Applied Mathematics</h3>
-                            <p class="company">Åbo Akademi University </p>
-                            <p class="period">2019 - 2022</p>
-                        </div>
-                        <div class="experience-item">
-                            <h3>MSc Pedagogics</h3>
-                            <p class="company">Åbo Akademi University </p>
-                            <p class="period">2014 - 2020</p>
-                        </div>
+                        {#if isExperienceOpen}
+                            <div class="experience-content">
+                                <div class="experience-item">
+                                    <h3>Data Scientist</h3>
+                                    <p class="company">Intrum</p>
+                                    <p class="period">2023 - 2024</p>
+                                    <ul>
+                                        <li>Used machine learning models to predict credit risk</li>
+                                        <li>Used LLMs to automatise business processes</li>
+                                        <li>Part of the team to improve LMOPS </li>
+                                    </ul>
+                                </div>
+                                <div class="experience-item">
+                                    <h3>Graduate Analyste</h3>
+                                    <p class="company">Intrum</p>
+                                    <p class="period">2022 - 2023</p>
+                                    <ul>
+                                        <li>Used SQL to query and analyse investment portfolios </li>
+                                        <li>Part of the project that predicts credit risk</li>
+                                    </ul>
+                                </div>
+                                <div class="experience-item">
+                                    <h3>E-learning Professional</h3>
+                                    <p class="company">Metso</p>
+                                    <p class="period">Summer 2018 & 2019</p>
+                                    <ul>
+                                        <li>Developed e-learning program for the finance department</li>
+                                    </ul>
+                                </div>
+                                <div class="experience-item">
+                                    <h3>MSc Applied Mathematics</h3>
+                                    <p class="company">Åbo Akademi University </p>
+                                    <p class="period">2019 - 2022</p>
+                                </div>
+                                <div class="experience-item">
+                                    <h3>MSc Pedagogics</h3>
+                                    <p class="company">Åbo Akademi University </p>
+                                    <p class="period">2014 - 2020</p>
+                                </div>
+                            </div>
+                        {/if}
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="/IMG_8607.jpg" alt="Minette Kaunismäki" class="profile-image" />
+                    <img src="/IMG_8607.gif" alt="Minette Kaunismäki" class="profile-image" />
                 </div>
             </div>
         </section>
@@ -299,6 +326,7 @@
         padding: 2rem;
         background-color: #fff;
         transition: background-color 0.3s ease;
+        margin-bottom: 4rem;
     }
 
     .dark-mode .hero {
@@ -309,6 +337,7 @@
     .about {
         background-color: #fff;
         transition: background-color 0.3s ease;
+        margin-bottom: 4rem;
     }
 
     .dark-mode .about {
@@ -319,6 +348,7 @@
     .projects {
         background-color: #fff;
         transition: background-color 0.3s ease;
+        margin-bottom: 4rem;
     }
 
     .dark-mode .projects {
@@ -382,6 +412,15 @@
 
     .dark-mode .about-text p {
         color: #ccc;
+    }
+
+    .dark-mode .experience-box {
+        background-color: #2a2a2a;
+        border-color: #333;
+    }
+
+    .dark-mode .experience-box:hover {
+        border-color: #fff;
     }
 
     .dark-mode .experience-item h3 {
@@ -485,7 +524,7 @@
 
     .hero-content {
         max-width: 1200px;
-        margin: 0 auto;
+        margin: 0 0 0 10%;
         width: 100%;
     }
 
@@ -543,14 +582,14 @@
     }
 
     .about h2 {
-        margin-left: 12rem;
+        margin-left: 10%;
         margin-bottom: 2rem;
         font-size: 3rem;
     }
 
     .about-content {
         max-width: 1000px;
-        margin: 0 0 0 12rem;
+        margin: 0 0 0 10%;
         display: flex;
         gap: 4rem;
         align-items: flex-start;
@@ -567,32 +606,85 @@
         margin-bottom: 2rem;
     }
 
+    .experience-box {
+        background-color: #fff;
+        padding: 2.5rem;
+        border-radius: 0;
+        box-shadow: none;
+        transition: all 0.4s ease;
+        border: 1px solid #eee;
+        max-width: 800px;
+        margin-top: 2rem;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .experience-box:hover {
+        transform: translateY(-5px);
+        border-color: #000;
+    }
+
+    .experience-toggle {
+        background: none;
+        border: none;
+        color: inherit;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: left;
+    }
+
+    .experience-toggle h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 300;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        text-transform: none;
+        transition: opacity 0.4s ease;
+        height: 1.5rem;
+    }
+
+    .experience-toggle h3.invisible {
+        opacity: 0;
+        height: 0;
+        margin: 0;
+    }
+
     .experience-content {
-        margin-top: 3rem;
+        position: relative;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+    }
+
+    .experience-content:not(:empty) {
+        max-height: 2000px;
     }
 
     .experience-item {
         margin-bottom: 3rem;
     }
 
-    .experience-item:last-child {
-        margin-bottom: 0;
+    .experience-item:first-child {
+        margin-top: 0;
     }
 
     .experience-item h3 {
-        font-size: 1.4rem;
-        margin: 0 0 0.5rem 0;
-        font-weight: 500;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     .experience-item .company {
-        font-size: 1.1rem;
         color: #666;
-        margin: 0 0 0.25rem 0;
+        line-height: 1.8;
+        margin: 0 0 0.5rem 0;
     }
 
     .experience-item .period {
-        font-size: 0.9rem;
         color: #999;
         margin: 0 0 1rem 0;
     }
@@ -608,16 +700,26 @@
         line-height: 1.6;
     }
 
-    .experience-item li:last-child {
-        margin-bottom: 0;
+    .dark-mode .experience-box {
+        background-color: #2a2a2a;
+        border-color: #333;
+    }
+
+    .dark-mode .experience-box:hover {
+        border-color: #fff;
+    }
+
+    .dark-mode .experience-toggle h3 {
+        color: #fff;
     }
 
     .about-image {
         flex: 1;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         height: 400;
+        transform: translateX(0rem);
     }
 
     .profile-image {
@@ -629,7 +731,7 @@
     }
 
     .projects h2 {
-        margin-left: 12rem;
+        margin-left: 10%;
         margin-bottom: 2rem;
         font-size: 3rem;
     }
@@ -639,7 +741,7 @@
         grid-template-columns: 1fr;
         gap: 3rem;
         max-width: 800px;
-        margin: 0 0 0 12rem;
+        margin: 0 0 0 10%;
         padding-bottom: 4rem;
     }
 
@@ -686,19 +788,22 @@
     }
 
     .contact h2 {
-        margin-left: 12rem;
+        margin-left: 10%;
         margin-bottom: 2rem;
         font-size: 3rem;
     }
 
     .contact-content {
         max-width: 600px;
-        margin: 0 0 0 12rem;
+        margin: 0 0 0 10%;
         padding-bottom: 16rem;
     }
 
     .contact-intro {
         margin-bottom: 2rem;
+        font-size: 1.2rem;
+        line-height: 1.8;
+        color: #333;
     }
 
     .contact-options {
@@ -730,6 +835,7 @@
     .contact-details p {
         font-size: 1.2rem;
         margin: 0;
+        color: #666;
     }
 
     /* Scroll-to-top button styles */
