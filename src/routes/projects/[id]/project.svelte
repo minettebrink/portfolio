@@ -46,7 +46,7 @@
 <svelte:head>
     <title>{project ? project.title : 'Project Not Found'} - Minette Kaunismäki</title>
     <meta name="description" content={project ? project.description : 'Project not found'} />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </svelte:head>
 
 <div class="layout" class:dark-mode={$isDarkMode}>
@@ -78,13 +78,13 @@
 
                 <div class="project-links">
                     {#if project.githubUrl}
-                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="project-link">
-                            View on GitHub
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View project on GitHub">
+                            <i class="fab fa-github"></i>
                         </a>
                     {/if}
                     {#if project.liveUrl}
-                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="project-link">
-                            Live Demo
+                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View project demo on YouTube">
+                            <i class="fab fa-youtube"></i>
                         </a>
                     {/if}
                 </div>
@@ -175,6 +175,12 @@
         transition: all 0.3s ease;
         text-transform: uppercase;
         letter-spacing: 2px;
+        display: inline-block;
+    }
+
+    .home-link a:hover {
+        color: #666;
+        transform: translateX(20px);
     }
 
     .dark-mode .home-link a {
@@ -297,26 +303,27 @@
     .project-links {
         margin-top: 3rem;
         display: flex;
-        gap: 1rem;
+        gap: 2rem;
     }
 
     .project-link {
-        display: inline-block;
-        padding: 0.75rem 1.5rem;
-        background-color: #000;
-        color: #fff;
+        color: #000;
+        font-size: 2rem;
+        transition: all 0.3s ease;
         text-decoration: none;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
+    }
+
+    .project-link:hover {
+        color: #666;
+        transform: translateY(-2px);
     }
 
     .dark-mode .project-link {
-        background-color: #fff;
-        color: #000;
+        color: #fff;
     }
 
     .dark-mode .project-link:hover {
-        background-color: #ccc;
+        color: #ccc;
     }
 
     @media (max-width: 768px) {

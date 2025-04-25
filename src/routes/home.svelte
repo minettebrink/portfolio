@@ -236,20 +236,12 @@
                 </p>
                 
                 <div class="contact-options">
-                    <a href="mailto:minette.kaum@gmail.com" class="contact-option">
+                    <a href="mailto:minette.kaum@gmail.com" class="contact-option" aria-label="Email Minette">
                         <i class="fas fa-envelope"></i>
-                        <div class="contact-details">
-                            <h3>Email</h3>
-                            <p>minette.kaum@gmail.com</p>
-                        </div>
                     </a>
                     
-                    <a href="https://www.linkedin.com/in/minette-kaunism%C3%A4ki-8b138b166/" target="_blank" rel="noopener noreferrer" class="contact-option">
+                    <a href="https://www.linkedin.com/in/minette-kaunism%C3%A4ki-8b138b166/" target="_blank" rel="noopener noreferrer" class="contact-option" aria-label="Visit Minette's LinkedIn profile">
                         <i class="fab fa-linkedin"></i>
-                        <div class="contact-details">
-                            <h3>LinkedIn</h3>
-                            <p>Send me a message</p>
-                        </div>
                     </a>
                 </div>
             </div>
@@ -415,7 +407,7 @@
     }
 
     .dark-mode .experience-box {
-        background-color: #2a2a2a;
+        background-color: #1a1a1a;
         border-color: #333;
     }
 
@@ -440,7 +432,7 @@
     }
 
     .dark-mode .project-card {
-        background-color: #2a2a2a;
+        background-color: #1a1a1a;
         border-color: #333;
     }
 
@@ -646,6 +638,7 @@
         text-transform: none;
         transition: opacity 0.4s ease;
         height: 1.5rem;
+        line-height: 1.5rem;
     }
 
     .experience-toggle h3.invisible {
@@ -659,6 +652,7 @@
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.4s ease;
+        margin-top: -2rem;
     }
 
     .experience-content:not(:empty) {
@@ -698,19 +692,6 @@
         color: #333;
         margin-bottom: 0.5rem;
         line-height: 1.6;
-    }
-
-    .dark-mode .experience-box {
-        background-color: #2a2a2a;
-        border-color: #333;
-    }
-
-    .dark-mode .experience-box:hover {
-        border-color: #fff;
-    }
-
-    .dark-mode .experience-toggle h3 {
-        color: #fff;
     }
 
     .about-image {
@@ -808,35 +789,26 @@
 
     .contact-options {
         display: flex;
-        gap: 2rem;
+        gap: 6rem;
+        margin-left: 5%;
     }
 
     .contact-option {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        justify-content: center;
         text-decoration: none;
         color: inherit;
+        font-size: 3rem;
+        transition: all 0.3s ease;
     }
 
     .contact-option:hover {
         color: #666;
+        transform: translateY(-2px);
     }
 
-    .contact-details {
-        text-align: left;
-    }
 
-    .contact-details h3 {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .contact-details p {
-        font-size: 1.2rem;
-        margin: 0;
-        color: #666;
-    }
 
     /* Scroll-to-top button styles */
     .scroll-top-button {
@@ -945,4 +917,9 @@
             width: 100%;
         }
     }
+
+    .dark-mode .contact-intro {
+        color: #ccc;
+    }
+
 </style> 
