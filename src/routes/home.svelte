@@ -136,9 +136,35 @@
             <div class="about-content">
                 <div class="about-text">
                     <p>
-                        Hello! I'm a web developer passionate about creating beautiful and functional websites. 
-                        I love learning new technologies and solving complex problems. I'm organising AI Tinkerers events in Paris,
-                        meetups and hackathons.
+                        Hi 👋🏼
+                    </p>
+
+                    <p>
+                        I'm Minette, a Developer Advocate with a master's degree in both mathematics and pedagogy.
+                    </p>
+
+                    <p>
+                        In the summer of 2024, I moved to Paris without knowing anyone in the city or the French, leaping into the unknown. I quit my job as a Data Scientist to carve a path that aligned more closely with my interests in AI and community building.
+                    </p>
+
+                    <p>
+                        Out of that momentum, I became the city organiser of AI Tinkerers in Paris, a space for people to build and hack with AI. 
+                    </p>
+
+                    <ul>
+                        <li>Expanded the community in Paris from 400 to 1,000 members (a 150% growth)</li>
+                        <li>Organised 4 demo evenings showcasing cutting-edge projects</li>
+                        <li>Hosted and organised a hackathon in partnership with Anthropic</li>
+                        <li>Collaborated with 7 companies to drive innovation</li>
+                        <li>Achieved an overall satisfaction score of 4.3/5 at all events</li>
+                    </ul>
+
+                    <p>
+                        I enjoy making technical content understandable and approachable. 
+                    </p>
+
+                    <p>
+                        Cheers!
                     </p>
                     <div 
                         class="experience-box" 
@@ -580,7 +606,7 @@
     }
 
     .about-content {
-        max-width: 1000px;
+        max-width: 1100px;
         margin: 0 0 0 10%;
         display: flex;
         gap: 4rem;
@@ -701,6 +727,7 @@
         align-items: center;
         height: 400;
         transform: translateX(0rem);
+        margin-top: 2rem;
     }
 
     .profile-image {
@@ -789,8 +816,17 @@
 
     .contact-options {
         display: flex;
-        gap: 6rem;
-        margin-left: 5%;
+        gap: 2rem;
+        margin-left: 0%;
+        margin-top: 2rem;
+    }
+
+    .contact-option:first-child {
+        margin-right: 0rem;
+    }
+
+    .contact-option:last-child {
+        margin-left: 4rem;
     }
 
     .contact-option {
@@ -799,7 +835,7 @@
         justify-content: center;
         text-decoration: none;
         color: inherit;
-        font-size: 3rem;
+        font-size: 2rem;
         transition: all 0.3s ease;
     }
 
