@@ -6,7 +6,7 @@ export const portfolioWebsite: Project = {
     title: 'Portfolio Website',
     description: 'A modern, responsive portfolio website built with SvelteKit.',
     content,
-    technologies: ['SvelteKit', 'TypeScript', 'TailwindCSS', 'Vercel'],
+    technologies: ['SvelteKit', 'TypeScript'],
     date: '2024-02-01',
     tags: ['Web Development', 'Portfolio', 'Design'],
     githubUrl: 'https://github.com/yourusername/ai-agent'

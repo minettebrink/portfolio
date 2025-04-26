@@ -21,7 +21,7 @@ export const videoGenerator: Project = {
     title: 'Video Generator',
     description: 'An AI-powered video generation tool that creates engaging content automatically.',
     content,
-    technologies: ['Svelte', 'TypeScript', 'TailwindCSS', 'AI APIs'],
+    technologies: ['Svelte', 'TypeScript', 'APIs'],
     date: '2024-03-15',
     tags: ['AI', 'Video', 'Web Development'],
     image: videoGeneratorImage,
@@ -42,6 +42,6 @@ export const videoGenerator: Project = {
         builderFrontendImage,
         builderBackendImage
     ],
-    githubUrl: 'https://github.com/yourusername/video-generator',
-    liveUrl: 'https://video-generator-demo.com'
+    githubUrl: 'https://github.com/minettebrink/image-to-video',
+    liveUrl: 'https://youtu.be/eZfTr2Mq9d8'
 }; 
