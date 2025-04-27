@@ -1,10 +1,10 @@
 import type { Project } from '../types';
 import content from './content/video-generator.md?raw';
-import videoGeneratorImage from './assets/video-generator-assets/demo.png?url';
-import videoDemo from './assets/video-generator-assets/generated-video.gif?url';
-import startImage from './assets/video-generator-assets/start_image.png?url';
 
-
+// Define image paths as strings instead of importing them directly
+const videoGeneratorImage = '/assets/video-generator-assets/demo.png';
+const videoDemo = '/assets/video-generator-assets/generated-video.gif';
+const startImage = '/assets/video-generator-assets/start_image.png';
 
 export const videoGenerator: Project = {
     id: 'video-generator',
@@ -18,7 +18,7 @@ export const videoGenerator: Project = {
     images: [
         videoGeneratorImage,
         videoDemo,
-        startImage,
+        startImage
     ],
     githubUrl: 'https://github.com/minettebrink/image-to-video',
     liveUrl: 'https://youtu.be/eZfTr2Mq9d8'
