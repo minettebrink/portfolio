@@ -9,5 +9,5 @@ export const portfolioWebsite: Project = {
     technologies: ['SvelteKit', 'TypeScript'],
     date: '2024-04-10',
     tags: ['Web Development', 'Portfolio', 'Design'],
-    githubUrl: 'https://github.com/yourusername/ai-agent'
+    githubUrl: 'https://github.com/minettebrink/portfolio'
 }; 
