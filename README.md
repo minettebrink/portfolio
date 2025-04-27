@@ -75,7 +75,6 @@ npm run preview
 
 This site is configured for deployment on Vercel. Simply connect your GitHub repository to Vercel, and it will automatically build and deploy your site.
 
-
 ## Contact
 
 Feel free to reach out if you have any questions or suggestions!
