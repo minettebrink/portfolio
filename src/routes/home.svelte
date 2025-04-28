@@ -276,12 +276,25 @@
 
     {#if showScrollArrow}
         <button 
-            class="mobile-scroll-top-button" 
+            class="scroll-top-button" 
             on:click={scrollToTop} 
             aria-label="Scroll to top"
             transition:fade={{ duration: 800 }}
         >
-            <i class="fas fa-arrow-up"></i>
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 14 106"
+                width="14"
+                height="106"
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="1" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"
+                class="arrow-svg"
+            >
+                <path d="M 7 105 L 7 1 M 0 11 L 7 1 L 14 11"></path>
+            </svg>
         </button>
     {/if}
 </div>
@@ -461,16 +474,6 @@
         background-color: #333;
         border-color: #444;
         color: #fff;
-    }
-
-    .dark-mode .scroll-top-button {
-        background-color: #2a2a2a;
-        color: #fff;
-    }
-
-    .dark-mode .scroll-top-button:hover {
-        background-color: #333;
-        color: #ccc;
     }
 
     .layout {
@@ -831,195 +834,81 @@
         transform: translateY(-2px);
     }
 
-    /* Mobile scroll-to-top button styles */
-    .mobile-scroll-top-button {
-        display: none;
+    /* Scroll-to-top button styles */
+    .scroll-top-button {
         position: fixed;
-        bottom: 4rem;
-        right: 1rem;
+        top: 50%;
+        right: 2rem;
+        transform: translate(50%, -50%);
         background-color: #fff;
         color: black;
-        border: 1px solid #eee;
-        border-radius: 50%;
-        width: 3rem;
-        height: 3rem;
+        border: none;
+        border-radius: 0;
+        width: auto;
+        height: auto;
+        padding: 20px 20px;
         cursor: pointer;
+        display: flex;
         align-items: center;
         justify-content: center;
         z-index: 1000;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
+        box-shadow: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    .mobile-scroll-top-button:hover {
-        background-color: #f8f8f8;
-        transform: translateY(-2px);
+    .scroll-top-button:hover {
+        background-color: #fff;
+        color: #555;
     }
 
-    .dark-mode .mobile-scroll-top-button {
+    .dark-mode .scroll-top-button {
         background-color: #1a1a1a;
         color: #fff;
-        border-color: #333;
     }
 
-    .dark-mode .mobile-scroll-top-button:hover {
-        background-color: #2a2a2a;
+    .dark-mode .scroll-top-button:hover {
+        background-color: #1a1a1a;
+        color: #ccc;
+    }
+
+    .scroll-top-button .arrow-svg {
+        display: block;
     }
 
     @media (max-width: 768px) {
-        .mobile-scroll-top-button {
-            display: flex;
-        }
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
-        .layout {
-            margin: 0;
-            border: none;
-        }
-
-        .hero {
-            min-height: auto;
-            padding: 4rem 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .hero-content {
-            margin: 0;
-            width: 100%;
-            padding: 0 1rem;
-        }
-
-        .hero-left {
-            text-align: center;
-        }
-
-        .menu-bar {
-            position: fixed;
+        .scroll-top-button {
             top: auto;
-            bottom: 0;
-            right: 0;
-            left: 0;
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 1rem;
-            transform: none;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .dark-mode .menu-bar {
-            background-color: rgba(26, 26, 26, 0.95);
-        }
-
-        .menu-bar ul {
-            flex-direction: row;
-            justify-content: space-around;
-            gap: 0;
-        }
-
-        .menu-bar a {
-            font-size: 1rem;
-        }
-
-        .menu-bar a:hover {
-            transform: none;
-        }
-
-        .name {
-            font-size: 2.5rem;
-        }
-
-        .title {
-            font-size: 1.5rem;
-        }
-
-        .social-links {
-            justify-content: center;
-            gap: 1.5rem;
-        }
-
-        .about h2,
-        .projects h2,
-        .contact h2 {
-            margin-left: 1rem;
-            font-size: 2rem;
-        }
-
-        .about-content {
-            flex-direction: column;
-            gap: 2rem;
-            margin: 0 1rem;
-        }
-
-        .about-text p {
-            font-size: 1rem;
-        }
-
-        .about-image {
-            order: -1;
-            justify-content: center;
-            margin-top: 0;
-        }
-
-        .profile-image {
-            max-width: 200px;
-            height: 250px;
-        }
-
-        .project-grid {
-            margin: 0 1rem;
-            gap: 2rem;
-        }
-
-        .project-card {
-            padding: 1.5rem;
-        }
-
-        .contact-content {
-            margin: 0 1rem;
-            padding-bottom: 6rem;
-        }
-
-        .contact-options {
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
-
-        .contact-option:first-child {
-            margin-right: 0;
-        }
-
-        .contact-option:last-child {
-            margin-left: 0;
-        }
-
-        .theme-toggle {
-            top: 1rem;
+            bottom: 4rem;
             right: 1rem;
             transform: none;
+            background-color: #fff;
+            color: black;
+            border: 1px solid #eee;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            padding: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .experience-box {
-            padding: 1.5rem;
-            margin-top: 1rem;
+        .scroll-top-button:hover {
+            background-color: #f8f8f8;
+            transform: translateY(-2px);
         }
 
-        .experience-item {
-            margin-bottom: 2rem;
+        .dark-mode .scroll-top-button {
+            background-color: #1a1a1a;
+            color: #fff;
+            border-color: #333;
         }
 
-        .experience-item h3 {
-            font-size: 1.2rem;
+        .dark-mode .scroll-top-button:hover {
+            background-color: #2a2a2a;
         }
 
-        .experience-item .company,
-        .experience-item .period {
-            font-size: 0.9rem;
-        }
-
-        .experience-item li {
-            font-size: 0.9rem;
+        .scroll-top-button .arrow-svg {
+            width: 12;
+            height: 12;
         }
     }
 
