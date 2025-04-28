@@ -274,30 +274,6 @@
         </section>
     </main>
 
-    {#if isMenuVisible && showScrollArrow}
-        <button 
-            class="scroll-top-button" 
-            on:click={scrollToTop} 
-            aria-label="Scroll to top"
-            transition:fade={{ duration: 800 }}
-        >
-            <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                viewBox="0 0 14 106"
-                width="14"
-                height="106"
-                fill="none" 
-                stroke="currentColor" 
-                stroke-width="1" 
-                stroke-linecap="round" 
-                stroke-linejoin="round"
-                class="arrow-svg"
-            >
-                <path d="M 7 105 L 7 1 M 0 11 L 7 1 L 14 11"></path>
-            </svg>
-        </button>
-    {/if}
-
     {#if showScrollArrow}
         <button 
             class="mobile-scroll-top-button" 
@@ -855,47 +831,6 @@
         transform: translateY(-2px);
     }
 
-    /* Scroll-to-top button styles */
-    .scroll-top-button {
-        position: fixed;
-        top: 50%;
-        right: 2rem;
-        transform: translate(50%, -50%);
-        background-color: #fff;
-        color: black;
-        border: none;
-        border-radius: 0;
-        width: auto;
-        height: auto;
-        padding: 20px 20px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-        box-shadow: none;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .scroll-top-button:hover {
-        background-color: #fff;
-        color: #555;
-    }
-
-    .dark-mode .scroll-top-button {
-        background-color: #1a1a1a;
-        color: #fff;
-    }
-
-    .dark-mode .scroll-top-button:hover {
-        background-color: #1a1a1a;
-        color: #ccc;
-    }
-
-    .scroll-top-button .arrow-svg {
-        display: block;
-    }
-
     /* Mobile scroll-to-top button styles */
     .mobile-scroll-top-button {
         display: none;
@@ -909,7 +844,6 @@
         width: 3rem;
         height: 3rem;
         cursor: pointer;
-        display: flex;
         align-items: center;
         justify-content: center;
         z-index: 1000;
@@ -933,10 +867,6 @@
     }
 
     @media (max-width: 768px) {
-        .scroll-top-button {
-            display: none;
-        }
-
         .mobile-scroll-top-button {
             display: flex;
         }
@@ -1068,10 +998,6 @@
             top: 1rem;
             right: 1rem;
             transform: none;
-        }
-
-        .scroll-top-button {
-            display: none;
         }
 
         .experience-box {
