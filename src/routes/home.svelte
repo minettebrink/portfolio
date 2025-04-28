@@ -876,9 +876,129 @@
     }
 
     @media (max-width: 768px) {
+        .layout {
+            margin: 0;
+            border: none;
+        }
+
+        .hero {
+            height: auto;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-content {
+            margin: 0;
+            width: 100%;
+        }
+
+        .name {
+            font-size: 2.5rem;
+        }
+
+        .title {
+            font-size: 1.5rem;
+        }
+
+        .social-links {
+            gap: 1.5rem;
+        }
+
+        .menu-bar {
+            position: fixed;
+            top: auto;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            background-color: #fff;
+            padding: 1rem 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            transform: none;
+        }
+
+        .dark-mode .menu-bar {
+            background-color: #1a1a1a;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-bar ul {
+            flex-direction: row;
+            justify-content: space-around;
+            gap: 0;
+        }
+
+        .menu-bar a {
+            font-size: 1rem;
+        }
+
+        .menu-bar a:hover {
+            transform: none;
+        }
+
+        .about h2,
+        .projects h2,
+        .contact h2 {
+            margin-left: 1rem;
+            font-size: 2rem;
+        }
+
+        .about-content {
+            flex-direction: column;
+            margin: 0 1rem;
+            gap: 2rem;
+        }
+
+        .about-text {
+            width: 100%;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+        }
+
+        .about-image {
+            justify-content: center;
+            margin-top: 0;
+        }
+
+        .profile-image {
+            max-width: 220px;
+            height: 270px;
+        }
+
+        .project-grid {
+            margin: 0 1rem;
+            gap: 2rem;
+        }
+
+        .contact-content {
+            margin: 0 1rem;
+            padding-bottom: 8rem;
+        }
+
+        .contact-options {
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .contact-option:first-child {
+            margin-right: 0;
+        }
+
+        .contact-option:last-child {
+            margin-left: 0;
+        }
+
+        .theme-toggle {
+            top: 1rem;
+            right: 1rem;
+            transform: none;
+        }
+
         .scroll-top-button {
             top: auto;
-            bottom: 4rem;
+            bottom: 5rem;
             right: 1rem;
             transform: none;
             background-color: #fff;
@@ -912,6 +1032,28 @@
             height: 12px;
             transform: rotate(180deg);
         }
+
+        .experience-box {
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .experience-item {
+            margin-bottom: 2rem;
+        }
+
+        .experience-item h3 {
+            font-size: 1.3rem;
+        }
+
+        .experience-item .company,
+        .experience-item .period {
+            font-size: 0.9rem;
+        }
+
+        .experience-item li {
+            font-size: 0.9rem;
+        }
     }
 
     @media (max-width: 480px) {
@@ -940,6 +1082,35 @@
         .profile-image {
             max-width: 180px;
             height: 220px;
+        }
+
+        .menu-bar a {
+            font-size: 0.9rem;
+        }
+
+        .project-card {
+            padding: 1.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+        }
+
+        .tech-tag {
+            font-size: 0.8rem;
+            padding: 0.4rem 0.8rem;
+        }
+
+        .contact-intro {
+            font-size: 1rem;
+        }
+
+        .contact-option {
+            font-size: 1.8rem;
         }
     }
 
