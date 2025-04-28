@@ -951,6 +951,8 @@
 
         .about-text {
             width: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .about-text p {
@@ -960,6 +962,7 @@
         .about-image {
             justify-content: center;
             margin-top: 0;
+            order: -1;
         }
 
         .profile-image {
