@@ -889,6 +889,7 @@
             height: 3rem;
             padding: 0;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
         .scroll-top-button:hover {
@@ -907,8 +908,9 @@
         }
 
         .scroll-top-button .arrow-svg {
-            width: 12;
-            height: 12;
+            width: 12px;
+            height: 12px;
+            transform: rotate(180deg);
         }
     }
 
