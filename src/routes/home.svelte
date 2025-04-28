@@ -1008,8 +1008,8 @@
             color: black;
             border: 1px solid #eee;
             border-radius: 50%;
-            width: 3rem;
-            height: 3rem;
+            width: 3.5rem;
+            height: 3.5rem;
             padding: 0;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
@@ -1031,9 +1031,9 @@
         }
 
         .scroll-top-button .arrow-svg {
-            width: 12px;
-            height: 12px;
-            transform: rotate(180deg);
+            width: 16px;
+            height: 16px;
+            transform: rotate(0deg);
         }
 
         .experience-box {
