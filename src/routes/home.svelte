@@ -297,6 +297,17 @@
             </svg>
         </button>
     {/if}
+
+    {#if showScrollArrow}
+        <button 
+            class="mobile-scroll-top-button" 
+            on:click={scrollToTop} 
+            aria-label="Scroll to top"
+            transition:fade={{ duration: 800 }}
+        >
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    {/if}
 </div>
 
 <style>
@@ -844,8 +855,6 @@
         transform: translateY(-2px);
     }
 
-
-
     /* Scroll-to-top button styles */
     .scroll-top-button {
         position: fixed;
@@ -885,6 +894,52 @@
 
     .scroll-top-button .arrow-svg {
         display: block;
+    }
+
+    /* Mobile scroll-to-top button styles */
+    .mobile-scroll-top-button {
+        display: none;
+        position: fixed;
+        bottom: 4rem;
+        right: 1rem;
+        background-color: #fff;
+        color: black;
+        border: 1px solid #eee;
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .mobile-scroll-top-button:hover {
+        background-color: #f8f8f8;
+        transform: translateY(-2px);
+    }
+
+    .dark-mode .mobile-scroll-top-button {
+        background-color: #1a1a1a;
+        color: #fff;
+        border-color: #333;
+    }
+
+    .dark-mode .mobile-scroll-top-button:hover {
+        background-color: #2a2a2a;
+    }
+
+    @media (max-width: 768px) {
+        .scroll-top-button {
+            display: none;
+        }
+
+        .mobile-scroll-top-button {
+            display: flex;
+        }
     }
 
     /* Responsive design */
