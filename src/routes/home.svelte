@@ -889,14 +889,21 @@
 
     /* Responsive design */
     @media (max-width: 768px) {
+        .layout {
+            margin: 0;
+            border: none;
+        }
+
         .hero {
             min-height: auto;
             padding: 4rem 1rem;
+            margin-bottom: 2rem;
         }
 
         .hero-content {
-            flex-direction: column;
-            gap: 3rem;
+            margin: 0;
+            width: 100%;
+            padding: 0 1rem;
         }
 
         .hero-left {
@@ -904,53 +911,163 @@
         }
 
         .menu-bar {
-            position: static;
+            position: fixed;
+            top: auto;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
             transform: none;
             width: 100%;
-            background-color: transparent;
-            padding: 0;
+            z-index: 1000;
+        }
+
+        .dark-mode .menu-bar {
+            background-color: rgba(26, 26, 26, 0.95);
         }
 
         .menu-bar ul {
-            align-items: center;
+            flex-direction: row;
+            justify-content: space-around;
+            gap: 0;
         }
 
         .menu-bar a {
-            font-size: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .menu-bar a:hover {
+            transform: none;
         }
 
         .name {
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
 
         .title {
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
 
         .social-links {
             justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .about h2,
+        .projects h2,
+        .contact h2 {
+            margin-left: 1rem;
+            font-size: 2rem;
         }
 
         .about-content {
             flex-direction: column;
             gap: 2rem;
+            margin: 0 1rem;
+        }
+
+        .about-text p {
+            font-size: 1rem;
         }
 
         .about-image {
             order: -1;
+            justify-content: center;
+            margin-top: 0;
         }
 
         .profile-image {
-            max-width: 250px;
+            max-width: 200px;
+            height: 250px;
         }
 
-        .contact-options {
-            flex-direction: column;
+        .project-grid {
+            margin: 0 1rem;
             gap: 2rem;
         }
 
-        .contact-option {
-            width: 100%;
+        .project-card {
+            padding: 1.5rem;
+        }
+
+        .contact-content {
+            margin: 0 1rem;
+            padding-bottom: 6rem;
+        }
+
+        .contact-options {
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .contact-option:first-child {
+            margin-right: 0;
+        }
+
+        .contact-option:last-child {
+            margin-left: 0;
+        }
+
+        .theme-toggle {
+            top: 1rem;
+            right: 1rem;
+            transform: none;
+        }
+
+        .scroll-top-button {
+            display: none;
+        }
+
+        .experience-box {
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .experience-item {
+            margin-bottom: 2rem;
+        }
+
+        .experience-item h3 {
+            font-size: 1.2rem;
+        }
+
+        .experience-item .company,
+        .experience-item .period {
+            font-size: 0.9rem;
+        }
+
+        .experience-item li {
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .name {
+            font-size: 2rem;
+        }
+
+        .title {
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            gap: 1rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+        }
+
+        .about h2,
+        .projects h2,
+        .contact h2 {
+            font-size: 1.8rem;
+        }
+
+        .profile-image {
+            max-width: 180px;
+            height: 220px;
         }
     }
 
