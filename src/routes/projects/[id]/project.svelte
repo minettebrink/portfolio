@@ -249,16 +249,129 @@
     }
 
     @media (max-width: 768px) {
+        .layout {
+            margin: 0;
+            border: none;
+        }
+
         .project-page {
-            padding: 3rem 1rem;
+            padding: 2rem 1rem;
+        }
+
+        .home-link {
+            position: fixed;
+            top: auto;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .dark-mode .home-link {
+            background-color: rgba(26, 26, 26, 0.95);
+        }
+
+        .home-link a {
+            font-size: 1rem;
+            transform: none;
+        }
+
+        .home-link a:hover {
+            transform: none;
         }
 
         .name {
-            font-size: 2.5rem;
+            font-size: 2rem;
+            margin-top: 1rem;
         }
         
         section {
-            padding: 0 2rem;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .project-meta {
+            margin: 0.5rem 0 1.5rem;
+            font-size: 0.8rem;
+        }
+
+        .technologies {
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .tech-tag {
+            font-size: 0.8rem;
+            padding: 0.4rem 0.8rem;
+        }
+
+        .content {
+            margin-top: 1.5rem;
+        }
+
+        .content :global(h1) {
+            font-size: 1.8rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .content :global(h2) {
+            font-size: 1.3rem;
+            margin: 1.2rem 0 0.8rem;
+        }
+
+        .content :global(p) {
+            font-size: 0.95rem;
+            margin: 0.8rem 0;
+        }
+
+        .content :global(ul), .content :global(ol) {
+            padding-left: 1.5rem;
+        }
+
+        .project-links {
+            margin-top: 2rem;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .project-link {
+            font-size: 1.8rem;
+        }
+
+        .theme-toggle {
+            top: 1rem;
+            right: 1rem;
+            transform: none;
+            font-size: 1.2rem;
+        }
+
+        .scroll-top-button {
+            display: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .name {
+            font-size: 1.8rem;
+        }
+
+        .content :global(h1) {
+            font-size: 1.5rem;
+        }
+
+        .content :global(h2) {
+            font-size: 1.2rem;
+        }
+
+        .content :global(p) {
+            font-size: 0.9rem;
+        }
+
+        .project-link {
+            font-size: 1.5rem;
         }
     }
 
