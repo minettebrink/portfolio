@@ -175,7 +175,7 @@
                         tabindex="0"
                     >
                         <div class="experience-toggle">
-                            <h3>View CV</h3>
+                            <h3>View CV/Resume</h3>
                         </div>
                     </a>
                 </div>
@@ -826,7 +826,7 @@
             min-height: 100vh;
             padding: 2rem 1rem;
             margin-top: 4rem;
-            margin-bottom: 2rem;
+            margin-bottom: 0;
         }
 
         .hero-content {
