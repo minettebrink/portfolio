@@ -140,27 +140,25 @@
                     </p>
 
                     <p>
-                        I'm Minette, a Developer Advocate with a master's degree in both mathematics and pedagogy. I enjoy making technical content understandable and approachable. 
+                        I'm Minette, a Developer Advocate with a Master's degree in both mathematics and pedagogy. It's a mix that has shaped how I approach work: with clarity, structure, and a focus on how people learn.
                     </p>
 
                     <p>
-                        In the summer of 2024, I moved to Paris without knowing anyone in the city or the French, leaping into the unknown. I quit my job as a Data Scientist to carve a path that aligned more closely with my interests in AI and community building.
+                        In the summer of 2024, I moved to Paris without knowing anyone in the city, or a word of French, leaping into the unknown. I quit my job as a Data Scientist to carve a path that aligned more closely with my interests in AI and community building.
                     </p>
 
                     <p>
-                        Out of that momentum, I became the city organiser of AI Tinkerers in Paris, a space for people to build and hack with AI. 
+                        Out of that momentum, I became the city organiser of AI Tinkerers in Paris. I collaborate with local startups, VCs, hackers and builders to create community for people to share their work. So far I have:
                     </p>
 
                     <ul>
-                        <li>Expanded the community in Paris from 400 to 1,000 members (a 150% growth)</li>
-                        <li>Organised 4 demo evenings showcasing cutting-edge projects</li>
-                        <li>Hosted and organised a hackathon in partnership with Anthropic</li>
-                        <li>Collaborated with 7 different companies</li>
+                        <li>Grown the community from 400 to 1,000 members (+250%)</li>
+                        <li>Organised a 200-person hackathon in partnership with Anthropic, HuggingFace, General Catalyst and Koyeb at Station F</li>
                         <li>Achieved an overall satisfaction score of 4.3/5 at all events</li>
                     </ul>
 
                     <p>
-                        Currently, I'm doing contract work for Koyeb as a Developer Advocate.
+                        What drives me is working directly with people and helping them solve real problems. I believe a great Developer Advocate needs both a solid technical foundation and the empathy to meet people where they are. It's not just about explaining things clearly, it's about creating content and experiences that genuinely help people, and in doing so, move the needle for both the community and the business.
                     </p>
 
                     <p>
@@ -206,14 +204,10 @@
             <h2>Contact Me</h2>
             <div class="contact-content">
                 <p class="contact-intro">
-                    If you want to get in touch, feel free to reach out:
+                    If you want to get in touch, feel free to reach out or connect
                 </p>
                 
                 <div class="contact-options">
-                    <a href="mailto:minette.kaum@gmail.com" class="contact-option" aria-label="Email Minette">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    
                     <a href="https://www.linkedin.com/in/minette-kaunism%C3%A4ki-8b138b166/" target="_blank" rel="noopener noreferrer" class="contact-option" aria-label="Visit Minette's LinkedIn profile">
                         <i class="fab fa-linkedin"></i>
                     </a>
@@ -701,17 +695,8 @@
 
     .contact-options {
         display: flex;
-        gap: 2rem;
-        margin-left: 0%;
+        justify-content: flex-start;
         margin-top: 2rem;
-    }
-
-    .contact-option:first-child {
-        margin-right: 0rem;
-    }
-
-    .contact-option:last-child {
-        margin-left: 4rem;
     }
 
     .contact-option {
@@ -810,10 +795,18 @@
 
         .hero {
             height: auto;
-            min-height: 100vh;
+            min-height: 80vh;
             padding: 2rem 1rem;
             margin-top: 4rem;
             margin-bottom: 0;
+        }
+
+        section {
+            padding: 2rem 0;
+        }
+
+        .about {
+            margin-top: -2rem;
         }
 
         .hero-content {
@@ -878,16 +871,8 @@
         }
 
         .contact-options {
-            justify-content: center;
+            justify-content: flex-start;
             margin-top: 1.5rem;
-        }
-
-        .contact-option:first-child {
-            margin-right: 0;
-        }
-
-        .contact-option:last-child {
-            margin-left: 0;
         }
 
         .theme-toggle {
