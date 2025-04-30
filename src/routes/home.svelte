@@ -140,7 +140,7 @@
                     </p>
 
                     <p>
-                        I'm Minette, a Developer Advocate with a master's degree in both mathematics and pedagogy.
+                        I'm Minette, a Developer Advocate with a master's degree in both mathematics and pedagogy. I enjoy making technical content understandable and approachable. 
                     </p>
 
                     <p>
@@ -160,76 +160,24 @@
                     </ul>
 
                     <p>
-                        I enjoy making technical content understandable and approachable. 
+                        Currently, I'm doing contract work for Koyeb as a Developer Advocate.
                     </p>
 
                     <p>
                         Cheers!
                     </p>
-                    <div 
+                    <a 
+                        href="/cv.pdf" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
                         class="experience-box" 
-                        on:click={() => {
-                            isExperienceOpen = !isExperienceOpen;
-                            if (!isExperienceOpen) {
-                                document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' });
-                            }
-                        }}
                         role="button"
                         tabindex="0"
-                        on:keydown={(e) => {
-                            if (e.key === 'Enter') {
-                                isExperienceOpen = !isExperienceOpen;
-                                if (!isExperienceOpen) {
-                                    document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' });
-                                }
-                            }
-                        }}
                     >
                         <div class="experience-toggle">
-                            <h3 class:invisible={isExperienceOpen}>Experience</h3>
+                            <h3>View CV</h3>
                         </div>
-                        {#if isExperienceOpen}
-                            <div class="experience-content">
-                                <div class="experience-item">
-                                    <h3>Data Scientist</h3>
-                                    <p class="company">Intrum</p>
-                                    <p class="period">2023 - 2024</p>
-                                    <ul>
-                                        <li>Used machine learning models to predict credit risk</li>
-                                        <li>Used LLMs to automatise business processes</li>
-                                        <li>Part of the team to improve LMOPS </li>
-                                    </ul>
-                                </div>
-                                <div class="experience-item">
-                                    <h3>Graduate Analyste</h3>
-                                    <p class="company">Intrum</p>
-                                    <p class="period">2022 - 2023</p>
-                                    <ul>
-                                        <li>Used SQL to query and analyse investment portfolios </li>
-                                        <li>Part of the project that predicts credit risk</li>
-                                    </ul>
-                                </div>
-                                <div class="experience-item">
-                                    <h3>E-learning Professional</h3>
-                                    <p class="company">Metso</p>
-                                    <p class="period">Summer 2018 & 2019</p>
-                                    <ul>
-                                        <li>Developed e-learning program for the finance department</li>
-                                    </ul>
-                                </div>
-                                <div class="experience-item">
-                                    <h3>MSc Applied Mathematics</h3>
-                                    <p class="company">Åbo Akademi University </p>
-                                    <p class="period">2019 - 2022</p>
-                                </div>
-                                <div class="experience-item">
-                                    <h3>MSc Pedagogics</h3>
-                                    <p class="company">Åbo Akademi University </p>
-                                    <p class="period">2014 - 2020</p>
-                                </div>
-                            </div>
-                        {/if}
-                    </div>
+                    </a>
                 </div>
                 <div class="about-image">
                     <img src="/IMG_8607.gif" alt="Minette Kaunismäki" class="profile-image" />
@@ -441,22 +389,6 @@
         border-color: #fff;
     }
 
-    .dark-mode .experience-item h3 {
-        color: #fff;
-    }
-
-    .dark-mode .experience-item .company {
-        color: #ccc;
-    }
-
-    .dark-mode .experience-item .period {
-        color: #999;
-    }
-
-    .dark-mode .experience-item li {
-        color: #ccc;
-    }
-
     .dark-mode .project-card {
         background-color: #1a1a1a;
         border-color: #333;
@@ -625,6 +557,9 @@
         margin-top: 2rem;
         position: relative;
         cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        display: block;
     }
 
     .experience-box:hover {
@@ -657,57 +592,8 @@
         line-height: 1.5rem;
     }
 
-    .experience-toggle h3.invisible {
-        opacity: 0;
-        height: 0;
-        margin: 0;
-    }
-
-    .experience-content {
-        position: relative;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease;
-        margin-top: -2rem;
-    }
-
-    .experience-content:not(:empty) {
-        max-height: 2000px;
-    }
-
-    .experience-item {
-        margin-bottom: 3rem;
-    }
-
-    .experience-item:first-child {
-        margin-top: 0;
-    }
-
-    .experience-item h3 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .experience-item .company {
-        color: #666;
-        line-height: 1.8;
-        margin: 0 0 0.5rem 0;
-    }
-
-    .experience-item .period {
-        color: #999;
-        margin: 0 0 1rem 0;
-    }
-
-    .experience-item ul {
-        margin: 0;
-        padding-left: 1.5rem;
-    }
-
-    .experience-item li {
-        color: #333;
-        margin-bottom: 0.5rem;
-        line-height: 1.6;
+    .dark-mode .experience-toggle h3 {
+        color: #fff;
     }
 
     .about-image {
@@ -1041,22 +927,6 @@
             margin-top: 1.5rem;
         }
 
-        .experience-item {
-            margin-bottom: 2rem;
-        }
-
-        .experience-item h3 {
-            font-size: 1.3rem;
-        }
-
-        .experience-item .company,
-        .experience-item .period {
-            font-size: 0.9rem;
-        }
-
-        .experience-item li {
-            font-size: 0.9rem;
-        }
     }
 
     @media (max-width: 480px) {
