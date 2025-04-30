@@ -122,7 +122,7 @@
                     <h2 class="title">Developer Advocate</h2>
                     
                     <div class="social-links">
-                        <a href="https://github.com/minettebrink" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://github.com/minettekaum" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
                         <a href="https://www.linkedin.com/in/minette-kaunism%C3%A4ki-8b138b166/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                         <a href="https://x.com/MinetteKaum" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)"><i class="fab fa-x-twitter"></i></a>
                         <a href="https://www.youtube.com/@minettebrink557" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -155,7 +155,7 @@
                         <li>Expanded the community in Paris from 400 to 1,000 members (a 150% growth)</li>
                         <li>Organised 4 demo evenings showcasing cutting-edge projects</li>
                         <li>Hosted and organised a hackathon in partnership with Anthropic</li>
-                        <li>Collaborated with 7 companies to drive innovation</li>
+                        <li>Collaborated with 7 different companies</li>
                         <li>Achieved an overall satisfaction score of 4.3/5 at all events</li>
                     </ul>
 

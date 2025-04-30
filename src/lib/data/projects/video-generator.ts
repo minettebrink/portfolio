@@ -20,6 +20,6 @@ export const videoGenerator: Project = {
         videoDemo,
         startImage
     ],
-    githubUrl: 'https://github.com/minettebrink/image-to-video',
+    githubUrl: 'https://github.com/minettekaum/image-to-video',
     liveUrl: 'https://youtu.be/eZfTr2Mq9d8'
 }; 
