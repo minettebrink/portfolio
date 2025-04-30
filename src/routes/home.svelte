@@ -376,7 +376,7 @@
         color: #ccc;
     }
 
-    .dark-mode .about-text p {
+    .dark-mode .about-text p, .dark-mode .about-text li {
         color: #ccc;
     }
 
@@ -539,11 +539,20 @@
         flex: 1;
     }
 
-    .about-text p {
-        font-size: 1.2rem;
+    .about-text p, .about-text li {
         line-height: 1.8;
-        color: #333;
-        margin-bottom: 2rem;
+        color: inherit;
+        margin: 1rem 0;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .about-text ul {
+        margin: 1rem 0;
+        padding-left: 2rem;
+    }
+
+    .about-text li {
+        margin: 0.5rem 0;
     }
 
     .experience-box {
@@ -687,7 +696,7 @@
         margin-bottom: 2rem;
         font-size: 1.2rem;
         line-height: 1.8;
-        color: #333;
+        color: inherit;
     }
 
     .contact-options {
@@ -759,28 +768,6 @@
 
     .scroll-top-button .arrow-svg {
         display: block;
-    }
-
-    @media (max-width: 768px) {
-        .project-grid {
-            margin: 0 1rem;
-            gap: 2rem;
-        }
-
-        .theme-toggle {
-            display: none;
-        }
-
-        .layout {
-            margin: 0;
-            border: none;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .project-grid {
-            gap: 1.5rem;
-        }
     }
 
     @media (max-width: 768px) {
@@ -865,8 +852,13 @@
             flex-direction: column;
         }
 
-        .about-text p {
-            font-size: 1rem;
+        .about-text p, .about-text li {
+            font-size: 0.95rem;
+            margin: 0.8rem 0;
+        }
+
+        .about-text ul {
+            padding-left: 1.5rem;
         }
 
         .about-image {
@@ -907,33 +899,6 @@
         .scroll-top-button {
             display: none !important;
         }
-
-        .scroll-top-button:hover {
-            background-color: #f8f8f8;
-            transform: translateY(-2px);
-        }
-
-        .dark-mode .scroll-top-button {
-            background-color: #1a1a1a;
-            color: #fff;
-            border-color: #333;
-        }
-
-        .dark-mode .scroll-top-button:hover {
-            background-color: #2a2a2a;
-        }
-
-        .scroll-top-button .arrow-svg {
-            width: 18px;
-            height: 18px;
-            transform: rotate(0deg);
-        }
-
-        .experience-box {
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
     }
 
     @media (max-width: 480px) {
@@ -957,6 +922,10 @@
         .projects h2,
         .contact h2 {
             font-size: 1.8rem;
+        }
+
+        .about-text p, .about-text li {
+            font-size: 0.9rem;
         }
 
         .profile-image {
