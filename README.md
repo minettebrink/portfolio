@@ -8,14 +8,14 @@ A modern, responsive portfolio website built with SvelteKit to showcase my proje
 - **Dark/Light Mode**: Theme switcher for enhanced accessibility
 - **Project Showcase**: Detailed presentation of projects with descriptions and demos
 - **Blog Section**: Platform for sharing insights and technical knowledge
-- **Contact Form**: Easy way for visitors to reach out
+- **Contact**: Easy way for visitors to reach out
 
 ## Technology Stack
 
 - **Framework**: SvelteKit
   - Chosen for its performance and previous experience
   - Provides server-side rendering capabilities
-  - Offers great SEO optimization out of the box
+  - Offers SEO optimization out of the box
 
 - **Styling**: CSS
   - Custom styling with CSS features
