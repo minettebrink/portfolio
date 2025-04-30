@@ -248,10 +248,39 @@
         border-color: #ccc;
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 769px) {
         .layout {
             margin: 0;
             border: none;
+            background-color: #fff !important;
+            color: #000 !important;
+        }
+
+        .theme-toggle {
+            display: none !important;
+        }
+
+        .home-link {
+            background-color: #fff !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .home-link a {
+            color: #000 !important;
+        }
+
+        .tech-tag {
+            background-color: #f8f8f8 !important;
+            border-color: #eee !important;
+            color: #000 !important;
+        }
+
+        .project-link {
+            color: #000 !important;
+        }
+
+        .project-link:hover {
+            color: #666 !important;
         }
 
         .project-page {
@@ -349,24 +378,10 @@
             font-size: 1.8rem;
         }
 
-        .theme-toggle {
-            top: 1rem;
-            right: 1rem;
-            transform: none;
-            font-size: 1.2rem;
-        }
-
         .scroll-top-button {
             display: none;
         }
 
-        .desktop-link {
-            display: none;
-        }
-
-        .mobile-link {
-            display: block;
-        }
     }
 
     @media (max-width: 480px) {
@@ -403,6 +418,21 @@
 
     .content {
         margin-top: 2rem;
+    }
+
+    .content :global(img) {
+        max-width: 100%;
+        height: auto;
+        width: 100%;
+        display: block;
+        margin: 2rem 0;
+    }
+
+    @media (min-width: 769px) {
+        .content :global(img) {
+            max-width: 500px;
+            width: auto;
+        }
     }
 
     .content :global(h1) {
@@ -560,8 +590,5 @@
         display: block;
     }
 
-    .mobile-link {
-        display: none;
-    }
 
 </style> 

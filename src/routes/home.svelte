@@ -766,6 +766,15 @@
             margin: 0 1rem;
             gap: 2rem;
         }
+
+        .theme-toggle {
+            display: none;
+        }
+
+        .layout {
+            margin: 0;
+            border: none;
+        }
     }
 
     @media (max-width: 480px) {
