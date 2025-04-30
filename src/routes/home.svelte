@@ -762,15 +762,61 @@
     }
 
     @media (max-width: 768px) {
+        .project-grid {
+            margin: 0 1rem;
+            gap: 2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .project-grid {
+            gap: 1.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
         .layout {
             margin: 0;
             border: none;
+        }
+
+        .menu-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            background-color: #fff;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transform: none;
+            z-index: 1000;
+        }
+
+        .dark-mode .menu-bar {
+            background-color: #1a1a1a;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-bar ul {
+            flex-direction: row;
+            justify-content: space-around;
+            gap: 0;
+        }
+
+        .menu-bar a {
+            font-size: 1rem;
+        }
+
+        .menu-bar a:hover {
+            transform: none;
         }
 
         .hero {
             height: auto;
             min-height: 100vh;
             padding: 2rem 1rem;
+            margin-top: 4rem;
             margin-bottom: 2rem;
         }
 
@@ -789,37 +835,6 @@
 
         .social-links {
             gap: 1.5rem;
-        }
-
-        .menu-bar {
-            position: fixed;
-            top: auto;
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            background-color: #fff;
-            padding: 1rem 0;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            transform: none;
-        }
-
-        .dark-mode .menu-bar {
-            background-color: #1a1a1a;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .menu-bar ul {
-            flex-direction: row;
-            justify-content: space-around;
-            gap: 0;
-        }
-
-        .menu-bar a {
-            font-size: 1rem;
-        }
-
-        .menu-bar a:hover {
-            transform: none;
         }
 
         .about h2,
@@ -856,11 +871,6 @@
             height: 270px;
         }
 
-        .project-grid {
-            margin: 0 1rem;
-            gap: 2rem;
-        }
-
         .contact-content {
             margin: 0 1rem;
             padding-bottom: 8rem;
@@ -886,19 +896,7 @@
         }
 
         .scroll-top-button {
-            top: auto;
-            bottom: 5rem;
-            right: 1rem;
-            transform: none;
-            background-color: #fff;
-            color: black;
-            border: 1px solid #eee;
-            border-radius: 50%;
-            width: 3rem;
-            height: 3rem;
-            padding: 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            display: none !important;
         }
 
         .scroll-top-button:hover {

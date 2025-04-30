@@ -248,7 +248,7 @@
         border-color: #ccc;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
         .layout {
             margin: 0;
             border: none;
@@ -260,27 +260,35 @@
 
         .home-link {
             position: fixed;
-            top: auto;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 1rem;
-            text-align: center;
+            width: 100%;
+            background-color: #fff;
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transform: none;
             z-index: 1000;
+            text-align: center;
         }
 
         .dark-mode .home-link {
-            background-color: rgba(26, 26, 26, 0.95);
+            background-color: #1a1a1a;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .home-link a {
             font-size: 1rem;
             transform: none;
+            display: inline-block;
         }
 
         .home-link a:hover {
             transform: none;
+        }
+
+        .home-link br {
+            display: none;
         }
 
         .name {
@@ -350,6 +358,14 @@
 
         .scroll-top-button {
             display: none;
+        }
+
+        .desktop-link {
+            display: none;
+        }
+
+        .mobile-link {
+            display: block;
         }
     }
 
@@ -452,6 +468,31 @@
         .project-link {
             text-align: center;
         }
+
+        .scroll-top-button {
+            display: none !important;
+        }
+
+        .scroll-top-button:hover {
+            background-color: #f8f8f8;
+            transform: translateY(-2px);
+        }
+
+        .dark-mode .scroll-top-button {
+            background-color: #1a1a1a;
+            color: #fff;
+            border-color: #333;
+        }
+
+        .dark-mode .scroll-top-button:hover {
+            background-color: #2a2a2a;
+        }
+
+        .scroll-top-button .arrow-svg {
+            width: 18px;
+            height: 18px;
+            transform: rotate(0deg);
+        }
     }
 
     /* Theme toggle button */
@@ -517,6 +558,10 @@
 
     .scroll-top-button .arrow-svg {
         display: block;
+    }
+
+    .mobile-link {
+        display: none;
     }
 
 </style> 

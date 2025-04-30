@@ -1,6 +1,6 @@
 # Image-to-Video Converter
 
-<img src="/assets/video-generator-assets/demo.png" width="800" alt="demo">
+<img src="/assets/video-generator-assets/demo.png" width="500" alt="demo">
 
 ## Introduction
 This project started from a recruiting process. In this blog post, I'll tell you about how it was to build and about the highs and lows. If you want to know more about the technical part of the project, you can look at the GitHub repo.
