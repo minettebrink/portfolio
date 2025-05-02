@@ -755,7 +755,7 @@
         display: block;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1000px) {
         .layout {
             margin: 0;
             border: none;

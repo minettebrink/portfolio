@@ -248,7 +248,7 @@
         border-color: #ccc;
     }
 
-    @media (max-width: 769px) {
+    @media (max-width: 1000px) {
         .layout {
             margin: 0;
             border: none;
