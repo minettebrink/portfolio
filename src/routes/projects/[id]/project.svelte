@@ -3,7 +3,8 @@
     import { projects } from '$lib/data/projects';
     import { marked } from 'marked';
     import { isDarkMode } from '$lib/stores/theme';
-    import { fade } from 'svelte/transition';
+    import { fade, fly } from 'svelte/transition';
+    import CoachAgentProject from './CoachAgentProject.svelte';
     
     // Get the project ID from the URL
     const projectId = $page.params.id;
@@ -13,6 +14,25 @@
     
     // Convert markdown content to HTML
     $: projectContent = project ? marked(project.content) : '';
+
+    // Split content into three parts only for coach-agent project
+    $: contentParts = projectId === 'coach-agent' 
+        ? (projectContent as string).split('<h2>').filter(Boolean).map((part: string) => '<h2>' + part)
+        : [projectContent];
+    $: currentPartIndex = 0;
+    $: currentPart = contentParts[currentPartIndex];
+
+    function nextPart() {
+        if (currentPartIndex < contentParts.length - 1) {
+            currentPartIndex++;
+        }
+    }
+
+    function previousPart() {
+        if (currentPartIndex > 0) {
+            currentPartIndex--;
+        }
+    }
 
     let showScrollArrow = false;
 
@@ -59,36 +79,40 @@
         </nav>
 
         {#if project}
-            <section class="project-section">
-                <h1 class="name">{project.title}</h1>
-                
-                <div class="project-meta">
-                    <span class="date">{new Date(project.date).toLocaleDateString()}</span>
-                </div>
-                
-                <div class="technologies">
-                    {#each project.technologies as tech}
-                        <span class="tech-tag">{tech}</span>
-                    {/each}
-                </div>
+            {#if projectId === 'coach-agent'}
+                <CoachAgentProject {project} />
+            {:else}
+                <section class="project-section">
+                    <h1 class="name">{project.title}</h1>
+                    
+                    <div class="project-meta">
+                        <span class="date">{new Date(project.date).toLocaleDateString()}</span>
+                    </div>
+                    
+                    <div class="technologies">
+                        {#each project.technologies as tech}
+                            <span class="tech-tag">{tech}</span>
+                        {/each}
+                    </div>
 
-                <div class="content">
-                    {@html projectContent}
-                </div>
+                    <div class="content">
+                        {@html projectContent}
+                    </div>
 
-                <div class="project-links">
-                    {#if project.githubUrl}
-                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View project on GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    {/if}
-                    {#if project.liveUrl}
-                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View project demo on YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    {/if}
-                </div>
-            </section>
+                    <div class="project-links">
+                        {#if project.githubUrl}
+                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View project on GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        {/if}
+                        {#if project.liveUrl}
+                            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View project demo on YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        {/if}
+                    </div>
+                </section>
+            {/if}
         {:else}
             <section class="error-section">
                 <h1 class="name">Project Not Found</h1>
@@ -417,10 +441,11 @@
     }
 
     .content {
-        margin-top: 2rem;
+        flex: 1;
+        padding: 0 2rem;
     }
 
-    .content :global(img) {
+  .content :global(img) {
         max-width: 100%;
         height: auto;
         width: 100%;
@@ -589,6 +614,5 @@
     .scroll-top-button .arrow-svg {
         display: block;
     }
-
 
 </style> 
