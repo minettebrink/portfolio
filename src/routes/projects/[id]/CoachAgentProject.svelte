@@ -1,29 +1,8 @@
 <script lang="ts">
-    import { fade, fly } from 'svelte/transition';
     import type { Project } from '$lib/data/types';
     import { marked } from 'marked';
 
     export let project: Project;
-
-    // Split content into three parts
-    $: contentParts = (marked(project.content) as string)
-        .split('<h2>')
-        .filter(Boolean)
-        .map((part: string) => '<h2>' + part);
-    $: currentPartIndex = 0;
-    $: currentPart = contentParts[currentPartIndex];
-
-    function nextPart() {
-        if (currentPartIndex < contentParts.length - 1) {
-            currentPartIndex++;
-        }
-    }
-
-    function previousPart() {
-        if (currentPartIndex > 0) {
-            currentPartIndex--;
-        }
-    }
 </script>
 
 <section class="project-section">
@@ -52,36 +31,8 @@
         {/if}
     </div>
 
-    <div class="content-navigation">
-        <button 
-            class="nav-button up-button" 
-            on:click={previousPart} 
-            disabled={currentPartIndex === 0}
-            aria-label="Previous section"
-        >
-            <i class="fas fa-chevron-up"></i>
-        </button>
-        
-        <div class="content">
-            {#key currentPartIndex}
-                <div 
-                    in:fly={{ y: 50, duration: 300, delay: 300 }} 
-                    out:fade={{ duration: 200 }}
-                    class="content-part"
-                >
-                    {@html currentPart}
-                </div>
-            {/key}
-        </div>
-
-        <button 
-            class="nav-button down-button" 
-            on:click={nextPart} 
-            disabled={currentPartIndex === contentParts.length - 1}
-            aria-label="Next section"
-        >
-            <i class="fas fa-chevron-down"></i>
-        </button>
+    <div class="content">
+        {@html marked(project.content)}
     </div>
 </section>
 
@@ -89,55 +40,6 @@
     .project-section {
         margin-top: 2rem;
         padding: 0 12rem;
-    }
-
-    .content-navigation {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-        margin: 2rem 0;
-        width: 100%;
-        position: relative;
-    }
-
-    .nav-button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 1rem;
-        font-size: 1.5rem;
-        color: #000;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .up-button {
-        top: 0;
-        margin-bottom: 0;
-    }
-
-    .up-button:hover:not(:disabled) {
-        transform: translateX(-50%) translateY(-5px);
-    }
-
-    .down-button {
-        bottom: 0;
-        margin-top: 0;
-    }
-
-    .down-button:hover:not(:disabled) {
-        transform: translateX(-50%) translateY(5px);
-    }
-
-    .nav-button:disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
     }
 
     .content {
@@ -232,7 +134,7 @@
     }
 
     @media (max-width: 768px) {
-        .content {
+        .project-section {
             padding: 0;
         }
 
@@ -251,13 +153,5 @@
         .content :global(p) {
             font-size: 0.9rem;
         }
-
-        .project-link {
-            font-size: 1.5rem;
-        }
-    }
-
-    .content-part {
-        width: 100%;
     }
 </style> 

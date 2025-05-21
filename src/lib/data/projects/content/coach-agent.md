@@ -1,7 +1,7 @@
 # Building an AI-Powered WhatsApp Mood Tracking Agent
 
 <div style="display: flex; gap: 4rem; align-items: flex-start; flex-wrap: wrap;">
-<div style="flex: 0 1 300px; max-width: 400px;">
+<div style="flex: 0 1 350px; max-width: 400px;">
 
 In this tutorial, we'll build a WhatsApp agent that helps users track their mood by collecting sleep quality and stress level ratings. The agent uses Oura Ring data, OpenAI's API, and Twilio's WhatsApp API to create an interactive and personalized health tracking experience. This is the end product
 
@@ -16,8 +16,8 @@ In this tutorial, we'll build a WhatsApp agent that helps users track their mood
 5. Personalized insights and recommendations are sent back to the user
 
 </div>
-<div style="flex: 1; display: flex; justify-content: center; align-items: flex-start;">
-<img src="/assets/coach-agent-assets/demo.gif" width="400" alt="Demo" style="margin-left: -100px;">
+<div style="flex: 1; display: flex; justify-content: flex-end; align-items: flex-start;">
+<img src="/assets/coach-agent-assets/demo.gif" width="400" alt="Demo">
 </div>
 </div>
 
@@ -56,7 +56,6 @@ WHATSAPP_TO_NUMBER=your_whatsapp_number_here
 OPENAI_API_KEY=your_openai_api_key_here
 OURA_TOKEN=your_oura_token_here
 ```
-
 
 ## 1. Fetching Health Data from Oura Ring
 
@@ -265,7 +264,7 @@ This module:
 - Collects user ratings
 - Integrates with the AI analysis
 
-## Deployment and Running
+## Deployment Guide
 
 ### Setting Up Twilio WhatsApp Sandbox
 
@@ -294,7 +293,7 @@ ngrok http 5001
 python whatsapp.py
 ```
 
-## Next Steps and Troubleshooting
+## Additional Resources
 
 ### Customization Ideas
 
