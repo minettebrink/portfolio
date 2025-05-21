@@ -95,10 +95,6 @@
                         {/each}
                     </div>
 
-                    <div class="content">
-                        {@html projectContent}
-                    </div>
-
                     <div class="project-links">
                         {#if project.githubUrl}
                             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View project on GitHub">
@@ -110,6 +106,10 @@
                                 <i class="fab fa-youtube"></i>
                             </a>
                         {/if}
+                    </div>
+
+                    <div class="content">
+                        {@html projectContent}
                     </div>
                 </section>
             {/if}
@@ -442,7 +442,6 @@
 
     .content {
         flex: 1;
-        padding: 0 2rem;
     }
 
   .content :global(img) {

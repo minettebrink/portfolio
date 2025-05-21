@@ -39,6 +39,19 @@
         {/each}
     </div>
 
+    <div class="project-links">
+        {#if project.githubUrl}
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View project on GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+        {/if}
+        {#if project.liveUrl}
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View project demo on YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+        {/if}
+    </div>
+
     <div class="content-navigation">
         <button 
             class="nav-button up-button" 
@@ -51,7 +64,11 @@
         
         <div class="content">
             {#key currentPartIndex}
-                <div in:fly={{ y: 20, duration: 400 }} out:fade={{ duration: 200 }}>
+                <div 
+                    in:fly={{ y: 50, duration: 300, delay: 300 }} 
+                    out:fade={{ duration: 200 }}
+                    class="content-part"
+                >
                     {@html currentPart}
                 </div>
             {/key}
@@ -66,32 +83,22 @@
             <i class="fas fa-chevron-down"></i>
         </button>
     </div>
-
-    <div class="project-links">
-        {#if project.githubUrl}
-            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View project on GitHub">
-                <i class="fab fa-github"></i>
-            </a>
-        {/if}
-        {#if project.liveUrl}
-            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View project demo on YouTube">
-                <i class="fab fa-youtube"></i>
-            </a>
-        {/if}
-    </div>
 </section>
 
 <style>
     .project-section {
+        margin-top: 2rem;
         padding: 0 12rem;
     }
 
     .content-navigation {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         gap: 1rem;
         margin: 2rem 0;
+        width: 100%;
+        position: relative;
     }
 
     .nav-button {
@@ -105,19 +112,27 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .up-button {
-        margin-bottom: 1rem;
+        top: 0;
+        margin-bottom: 0;
+    }
+
+    .up-button:hover:not(:disabled) {
+        transform: translateX(-50%) translateY(-5px);
     }
 
     .down-button {
-        margin-top: 1rem;
+        bottom: 0;
+        margin-top: 0;
     }
 
-    .nav-button:hover:not(:disabled) {
-        color: #666;
-        transform: scale(1.1);
+    .down-button:hover:not(:disabled) {
+        transform: translateX(-50%) translateY(5px);
     }
 
     .nav-button:disabled {
@@ -127,7 +142,8 @@
 
     .content {
         flex: 1;
-        padding: 0 12rem;
+        padding: 4rem 0;
+        width: 100%;
     }
 
     .content :global(img) {
@@ -239,5 +255,9 @@
         .project-link {
             font-size: 1.5rem;
         }
+    }
+
+    .content-part {
+        width: 100%;
     }
 </style> 

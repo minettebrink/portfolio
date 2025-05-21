@@ -1,11 +1,31 @@
 # Building an AI-Powered WhatsApp Mood Tracking Agent
 
+<div style="display: flex; gap: 4rem; align-items: flex-start; flex-wrap: wrap;">
+<div style="flex: 0 1 300px; max-width: 400px;">
+
 In this tutorial, we'll build a WhatsApp agent that helps users track their mood by collecting sleep quality and stress level ratings. The agent uses Oura Ring data, OpenAI's API, and Twilio's WhatsApp API to create an interactive and personalized health tracking experience. This is the end product
 
-<img src="/assets/coach-agent-assets/demo.gif" width="400" alt="Demo">
+### How It Works
 
+1. The system starts by fetching the last 4 days of health data from Oura Ring
+2. The WhatsApp agent sends an initial message asking about sleep quality
+3. When the user responds with a number between 1-100:
+   - If it's the first response, it's stored as the sleep rating
+   - If it's the second response, it's stored as the stress level
+4. The AI processes the responses along with Oura Ring data
+5. Personalized insights and recommendations are sent back to the user
 
-## Prerequisites
+</div>
+<div style="flex: 1; display: flex; justify-content: center; align-items: flex-start;">
+<img src="/assets/coach-agent-assets/demo.gif" width="400" alt="Demo" style="margin-left: -100px;">
+</div>
+</div>
+
+## Project Setup
+
+Before we dive into the implementation, let's get everything set up properly.
+
+### Prerequisites
 
 - Python 3.8 or higher
 - Oura Ring account and API token
@@ -13,7 +33,7 @@ In this tutorial, we'll build a WhatsApp agent that helps users track their mood
 - Twilio account with WhatsApp sandbox
 - ngrok for webhook tunneling
 
-## Setting Up the Environment
+### Setting Up the Environment
 
 1. First, create a new directory for your project and set up a virtual environment:
 ```bash
@@ -36,6 +56,7 @@ WHATSAPP_TO_NUMBER=your_whatsapp_number_here
 OPENAI_API_KEY=your_openai_api_key_here
 OURA_TOKEN=your_oura_token_here
 ```
+
 
 ## 1. Fetching Health Data from Oura Ring
 
@@ -244,7 +265,9 @@ This module:
 - Collects user ratings
 - Integrates with the AI analysis
 
-## Setting Up Twilio WhatsApp Sandbox
+## Deployment and Running
+
+### Setting Up Twilio WhatsApp Sandbox
 
 1. Go to your Twilio Console
 2. Navigate to Messaging → Try it out → Send a WhatsApp message
@@ -252,7 +275,7 @@ This module:
 4. Send "join <your-sandbox-code>" to the sandbox number from your WhatsApp
 5. Note down the sandbox number for use in the code
 
-## Running the Agent
+### Running the Agent
 
 1. Start ngrok to expose your local server:
 ```bash
@@ -271,17 +294,9 @@ ngrok http 5001
 python whatsapp.py
 ```
 
-## How It Works
+## Next Steps and Troubleshooting
 
-1. The system starts by fetching the last 4 days of health data from Oura Ring
-2. The WhatsApp agent sends an initial message asking about sleep quality
-3. When the user responds with a number between 1-100:
-   - If it's the first response, it's stored as the sleep rating
-   - If it's the second response, it's stored as the stress level
-4. The AI processes the responses along with Oura Ring data
-5. Personalized insights and recommendations are sent back to the user
-
-## Customization Ideas
+### Customization Ideas
 
 1. Add more health metrics from Oura Ring
 2. Implement data storage to track trends over time
@@ -291,7 +306,7 @@ python whatsapp.py
 6. Create personalized wellness plans
 7. Add natural language processing for free-form responses
 
-## Troubleshooting
+### Troubleshooting
 
 Common issues and solutions:
 
@@ -315,7 +330,7 @@ Common issues and solutions:
    - Check if the webhook URL is correctly set in Twilio
    - Ensure the server is running on port 5001
 
-## Conclusion
+### Conclusion
 
 This tutorial showed you how to create an intelligent health tracking agent that combines:
 - Oura Ring health data
@@ -330,7 +345,7 @@ The system demonstrates:
 
 You can extend this implementation to create more sophisticated health and wellness applications.
 
-## Resources
+### Resources
 
 - [Twilio WhatsApp API Documentation](https://www.twilio.com/docs/whatsapp)
 - [Oura Ring API Documentation](https://cloud.ouraring.com/docs)
