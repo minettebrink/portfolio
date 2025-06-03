@@ -43,15 +43,59 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             activeHeading = entry.target.id;
+                        } else {
+                            // Check if we're at the bottom of the page
+                            const isAtBottom = (window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 200;
+                            if (isAtBottom) {
+                                // Find the most visible heading near the bottom
+                                const visibleHeadings = Array.from(headingElements).filter(heading => {
+                                    const rect = heading.getBoundingClientRect();
+                                    return rect.top <= window.innerHeight;
+                                });
+                                if (visibleHeadings.length > 0) {
+                                    activeHeading = visibleHeadings[visibleHeadings.length - 1].id;
+                                }
+                            }
+                            // Check if we're at the top of the page
+                            const isAtTop = window.pageYOffset <= 100;
+                            if (isAtTop) {
+                                const firstHeading = headingElements[0];
+                                if (firstHeading) {
+                                    activeHeading = firstHeading.id;
+                                }
+                            }
                         }
                     });
                 },
                 {
-                    rootMargin: '-100px 0px -66%'
+                    rootMargin: '-10% 0px -40%',
+                    threshold: [0, 0.1, 0.2, 0.5]
                 }
             );
 
             headingElements.forEach(heading => observer.observe(heading));
+
+            // Add scroll event listener for first and last sections
+            window.addEventListener('scroll', () => {
+                const isAtBottom = (window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 200;
+                const isAtTop = window.pageYOffset <= 100;
+
+                if (isAtBottom) {
+                    // Find the most visible heading near the bottom
+                    const visibleHeadings = Array.from(headingElements).filter(heading => {
+                        const rect = heading.getBoundingClientRect();
+                        return rect.top <= window.innerHeight;
+                    });
+                    if (visibleHeadings.length > 0) {
+                        activeHeading = visibleHeadings[visibleHeadings.length - 1].id;
+                    }
+                } else if (isAtTop) {
+                    const firstHeading = headingElements[0];
+                    if (firstHeading) {
+                        activeHeading = firstHeading.id;
+                    }
+                }
+            });
         }
     });
 
@@ -211,6 +255,10 @@
         font-weight: 500;
         margin: 0;
         line-height: 1.2;
+    }
+
+    .content :global(h1), .content :global(h2), .content :global(h3) {
+        scroll-margin-top: 100px;
     }
 
     .content :global(h1) {
