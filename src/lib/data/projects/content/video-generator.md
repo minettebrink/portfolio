@@ -43,7 +43,7 @@ Alternatively, you can manually create the application as described below.
 
 When clicking Create Service on your Koyeb account, choose GitHub and add the link to your public GitHub repo. After selecting the instance, click the Create Web Service button.
 
-<img src="static/ssets/video-generator-assets/service_type.png" width="500" alt="Service Type">
+<img src="static/assets/video-generator-assets/service_type.png" width="500" alt="Service Type">
 
 Select GitHub as the deployment method.
 Choose the repository containing your application code.
