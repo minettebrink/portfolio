@@ -19,11 +19,11 @@ Remember to deploy the backend first and then the frontend. If you use the Deplo
 
 You'll need to configure the deployment source by adding the link to the repo you forked.
 
-<img src="../../../../../static/assets/video-generator-assets/configure_deployment_source.png" width="500" alt="Service Type">
+<img src="/assets/video-generator-assets/configure_deployment_source.png" width="500" alt="Service Type">
 
 To configure the builder, select Dockerfile and write `./Dockerfile` in the docker file location and in the Work directory `/front_end`. 
     
-<img src="../../../../../static/assets/video-generator-assets/builder_frontend.png" width="500" alt="Service Type">
+<img src="/assets/video-generator-assets/builder_frontend.png" width="500" alt="Service Type">
 
 
 #### Backend
@@ -31,11 +31,11 @@ To configure the builder, select Dockerfile and write `./Dockerfile` in the dock
 
 You'll need to configure the deployment source by adding the link to the repo you forked.
 
-<img src="../../../../../static/assets/video-generator-assets/configure_deployment_source.png" width="500" alt="Service Type">
+<img src="/assets/video-generator-assets/configure_deployment_source.png" width="500" alt="Service Type">
 
 To configure the builder, select Dockerfile and write `./Dockerfile` in the docker file location and the Work directory `/back_end`. 
 
-<img src="../../../../../static/assets/video-generator-assets/builder_backend.png" width="500" alt="Builder Backend">
+<img src="/assets/video-generator-assets/builder_backend.png" width="500" alt="Builder Backend">
 
 
 Alternatively, you can manually create the application as described below.
@@ -43,7 +43,7 @@ Alternatively, you can manually create the application as described below.
 
 When clicking Create Service on your Koyeb account, choose GitHub and add the link to your public GitHub repo. After selecting the instance, click the Create Web Service button.
 
-<img src="../../../../../static/assets/video-generator-assets/service_type.png" width="500" alt="Service Type">
+<img src="/assets/video-generator-assets/service_type.png" width="500" alt="Service Type">
 
 Select GitHub as the deployment method.
 Choose the repository containing your application code.
@@ -52,35 +52,35 @@ Choose the repository containing your application code.
 ### For the frontend: 
 - To configure the builder, select Dockerfile and write `./Dockerfile` in the docker file location and in the Work directory `/front_end`. 
     
-    <img src="../../../../../static/assets/video-generator-assets/builder_frontend.png" width="500" alt="Service Type">
+    <img src="/assets/video-generator-assets/builder_frontend.png" width="500" alt="Service Type">
 - After the backend has started, add the URL as an environment variable with the name `VITE_BACKEND_URL`. 
     
-    <img src="../../../../../static/assets/video-generator-assets/variable_frontend.png" width="500" alt="Variable Frontend">
+    <img src="/assets/video-generator-assets/variable_frontend.png" width="500" alt="Variable Frontend">
 - In the Instance section, select the CPU category and choose Small. 
     
-    <img src="../../../../../static/assets/video-generator-assets/instance_frontend.png" width="500" alt="Instance Frontend">
+    <img src="/assets/video-generator-assets/instance_frontend.png" width="500" alt="Instance Frontend">
 - Add to Configure ports Port 5173 and Protocol HTTP. 
     
-    <img src="../../../../../static/assets/video-generator-assets/port_frontend.png" width="500" alt="Port Frontend">
+    <img src="/assets/video-generator-assets/port_frontend.png" width="500" alt="Port Frontend">
 - Click Deploy!
 - The repository will be pulled, built, and deployed on Koyeb. Once the deployment is complete, it will be accessible using the Koyeb subdomain for your service 🚀
 
 ### For the backend: 
 - To configure the builder, select Dockerfile and write `./Dockerfile` in the docker file location and the Work directory `/back_end`. 
 
-    <img src="../../../../../static/assets/video-generator-assets/builder_backend.png" width="500" alt="Builder Backend">
+    <img src="/assets/video-generator-assets/builder_backend.png" width="500" alt="Builder Backend">
 - After you've deployed the frontend, add the frontend URL as an environment variable with the name `ALLOWED_ORIGINS` to the backend. 
    
-    <img src="../../../../../static/assets/video-generator-assets/variable_backend.png" width="500" alt="Variable Backend">
+    <img src="/assets/video-generator-assets/variable_backend.png" width="500" alt="Variable Backend">
 - In the Instance section, select the GPU category and choose L40s. 
     
-    <img src="../../../../../static/assets/video-generator-assets/instance_backend.png" width="500" alt="Instance Backend">
+    <img src="/assets/video-generator-assets/instance_backend.png" width="500" alt="Instance Backend">
 - Add to Configure ports Port the port you chose and Protocol HTTP. 
 
-    <img src="../../../../../static/assets/video-generator-assets/port_backend.png" width="500" alt="Port Backend">
+    <img src="/assets/video-generator-assets/port_backend.png" width="500" alt="Port Backend">
 - In the Health checks section, set the Grace period to 900 seconds and Interval and Timeout to 60s. This will allow LTX-Video to download from Hugging Face and initialise the server. 
 
-    <img src="../../../../../static/assets/video-generator-assets/health_check_backend.png" width="500" alt="Health Check Backend">
+    <img src="/assets/video-generator-assets/health_check_backend.png" width="500" alt="Health Check Backend">
 - Click Deploy.
 - The repository will be pulled, built, and deployed on Koyeb. And you're ready to go 🚀 
 
