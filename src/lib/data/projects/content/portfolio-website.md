@@ -2,7 +2,7 @@
 ## Introduction
 This portfolio website represents my personal brand and showcases my projects, skills, and experiences in web development. Built with modern technologies and best practices, it serves as both a demonstration of my capabilities and a platform for sharing my work.
 
-## The Vision
+### The Vision
 The goal was to create a clean, modern, and user-friendly portfolio website that would effectively showcase my projects and skills. I wanted to ensure that the website would be visually appealing, performant, and accessible while maintaining a professional appearance.
 
 ## Key Features
@@ -45,13 +45,12 @@ The contact section provides multiple ways for visitors to reach out. Social med
 - Proper heading hierarchy
 - Sitemap implementation
 
-## Future Enhancements
+
+## Conclusion and Future Enhancements
+This portfolio website represents my commitment to creating modern, performant, and user-friendly web applications. It serves as both a showcase of my work and a platform for sharing knowledge with the developer community.
+
 While the website is functional and meets current needs, there's always room for improvement. Here are some planned enhancements:
 - Adding more projects and case studies
-- Integrating a CV/resume section
 - Enhancing the blog functionality with categories and search
-
-## Conclusion
-This portfolio website represents my commitment to creating modern, performant, and user-friendly web applications. It serves as both a showcase of my work and a platform for sharing knowledge with the developer community.
 
 Feel free to explore the live website and reach out if you have any questions or suggestions! 

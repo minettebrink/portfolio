@@ -4,6 +4,7 @@
     import { marked } from 'marked';
     import { isDarkMode } from '$lib/stores/theme';
     import { fade } from 'svelte/transition';
+    import { onMount } from 'svelte';
     
     // Get the project ID from the URL
     const projectId = $page.params.id;
@@ -15,6 +16,177 @@
     $: projectContent = project ? marked(project.content) : '';
 
     let showScrollArrow = false;
+    let headings: { id: string; text: string; level: number }[] = [];
+    let activeHeading = '';
+
+    onMount(() => {
+        // Extract headings from the content
+        const contentDiv = document.querySelector('.content');
+        if (contentDiv) {
+            const headingElements = contentDiv.querySelectorAll('h1, h2');
+            headings = Array.from(headingElements).map(heading => ({
+                id: heading.id || heading.textContent?.toLowerCase().replace(/\s+/g, '-') || '',
+                text: heading.textContent || '',
+                level: parseInt(heading.tagName[1])
+            }));
+
+            // Add IDs to headings if they don't have them
+            headingElements.forEach(heading => {
+                if (!heading.id) {
+                    heading.id = heading.textContent?.toLowerCase().replace(/\s+/g, '-') || '';
+                }
+            });
+
+            // Set up intersection observer for headings
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    const scrollingUp = lastScrollY > window.pageYOffset;
+                    lastScrollY = window.pageYOffset;
+
+                    if (!scrollingUp) {
+                        // Only use observer for scrolling down
+                        entries.forEach(entry => {
+                            const headingRect = entry.target.getBoundingClientRect();
+                            if (headingRect.top < window.innerHeight * 0.3 && headingRect.bottom > 0) {
+                                activeHeading = entry.target.id;
+                            }
+                        });
+                    }
+                },
+                {
+                    rootMargin: '0px',
+                    threshold: [0, 0.1]
+                }
+            );
+
+            let lastScrollY = window.pageYOffset;
+            let scrollTimeout: number | null = null;
+            let lastActiveChange = Date.now();
+            const CHANGE_THRESHOLD = 200; // Minimum time between changes in ms
+            
+            headingElements.forEach(heading => observer.observe(heading));
+
+            // Function to find the most appropriate heading
+            function findAppropriateHeading() {
+                const viewportHeight = window.innerHeight;
+                const headingsWithPositions = Array.from(headingElements).map(h => ({
+                    id: h.id,
+                    rect: h.getBoundingClientRect(),
+                    element: h
+                }));
+
+                // Filter headings that are in good viewing position
+                const visibleHeadings = headingsWithPositions.filter(h => {
+                    const rect = h.rect;
+                    // Consider headings in the top 85% of the viewport
+                    return rect.top < viewportHeight * 0.85 && rect.bottom > 0;
+                });
+
+                if (visibleHeadings.length === 0) return null;
+
+                // Sort by position from top to bottom
+                visibleHeadings.sort((a, b) => a.rect.top - b.rect.top);
+
+                // If we're near the bottom of the page
+                const isNearBottom = (window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 300;
+                
+                if (isNearBottom) {
+                    // Find headings that are properly visible
+                    const properlyVisibleHeadings = visibleHeadings.filter(h => 
+                        h.rect.top > -50 && h.rect.bottom <= viewportHeight * 0.95
+                    );
+                    
+                    if (properlyVisibleHeadings.length > 0) {
+                        // Get the last properly visible heading
+                        return properlyVisibleHeadings[properlyVisibleHeadings.length - 1];
+                    }
+                }
+
+                // For normal scrolling, get the last heading that's started to enter the viewport
+                const activeHeadings = visibleHeadings.filter(h => 
+                    h.rect.top <= viewportHeight * 0.5
+                );
+
+                return activeHeadings.length > 0 ? 
+                    activeHeadings[activeHeadings.length - 1] : 
+                    visibleHeadings[0];
+            }
+
+            // Add scroll event listener for immediate response
+            window.addEventListener('scroll', () => {
+                const now = Date.now();
+                const scrollingUp = lastScrollY > window.pageYOffset;
+                const scrollDelta = Math.abs(lastScrollY - window.pageYOffset);
+                lastScrollY = window.pageYOffset;
+
+                // Clear any existing timeout
+                if (scrollTimeout) {
+                    window.clearTimeout(scrollTimeout);
+                }
+
+                // Only process if enough time has passed since last change and scroll delta is significant
+                if (scrollingUp && now - lastActiveChange > CHANGE_THRESHOLD && scrollDelta > 20) {
+                    const headingsWithPositions = Array.from(headingElements).map(h => ({
+                        id: h.id,
+                        rect: h.getBoundingClientRect(),
+                        element: h
+                    }));
+
+                    const currentVisibleHeading = headingsWithPositions.find(h => 
+                        h.rect.top <= window.innerHeight * 0.4 && h.rect.bottom > 0
+                    );
+
+                    if (currentVisibleHeading) {
+                        const currentIndex = headingsWithPositions.findIndex(h => h.id === currentVisibleHeading.id);
+                        if (currentIndex > 0) {
+                            const newActiveHeading = headingsWithPositions[currentIndex - 1].id;
+                            if (newActiveHeading !== activeHeading) {
+                                activeHeading = newActiveHeading;
+                                lastActiveChange = now;
+                            }
+                        }
+                    }
+                } else if (!scrollingUp) {
+                    // For scrolling down, use a small delay to prevent too frequent updates
+                    scrollTimeout = window.setTimeout(() => {
+                        const appropriateHeading = findAppropriateHeading();
+                        if (appropriateHeading && appropriateHeading.id !== activeHeading) {
+                            activeHeading = appropriateHeading.id;
+                            lastActiveChange = now;
+                        }
+                    }, 50);
+                }
+
+                // Handle edge cases
+                const isAtBottom = (window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 50;
+                const isAtTop = window.pageYOffset <= 50;
+
+                if (isAtBottom) {
+                    // When at bottom, explicitly check for the last properly visible heading
+                    const lastHeadings = Array.from(headingElements).reverse();
+                    const lastVisibleHeading = lastHeadings.find(h => {
+                        const rect = h.getBoundingClientRect();
+                        return rect.top > -50 && rect.bottom <= window.innerHeight * 0.95;
+                    });
+                    
+                    if (lastVisibleHeading) {
+                        activeHeading = lastVisibleHeading.id;
+                        lastActiveChange = now;
+                    }
+                } else if (isAtTop) {
+                    activeHeading = headingElements[0].id;
+                    lastActiveChange = now;
+                }
+            });
+        }
+    });
+
+    function scrollToHeading(id: string) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 
     function scrollToProjects(event: MouseEvent) {
         event.preventDefault();
@@ -89,6 +261,21 @@
                     {/if}
                 </div>
             </section>
+
+            <nav class="table-of-contents" class:visible={headings.length > 0}>
+                <ul>
+                    {#each headings as heading}
+                        <li class="toc-item level-{heading.level}" class:active={activeHeading === heading.id}>
+                            <a 
+                                href="#{heading.id}" 
+                                on:click|preventDefault={() => scrollToHeading(heading.id)}
+                            >
+                                {heading.text}
+                            </a>
+                        </li>
+                    {/each}
+                </ul>
+            </nav>
         {:else}
             <section class="error-section">
                 <h1 class="name">Project Not Found</h1>
@@ -138,6 +325,43 @@
     :global(body.dark-mode) {
         background-color: #1a1a1a;
         color: #fff;
+    }
+
+    h1 {
+        font-weight: 300;
+        letter-spacing: -0.5px;
+    }
+
+    .name {
+        font-size: 4rem;
+        font-weight: 500;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .content :global(h1), .content :global(h2), .content :global(h3) {
+        scroll-margin-top: 100px;
+    }
+
+    .content :global(h1) {
+        font-size: 3rem;
+        margin: 2rem 0 1rem;
+        font-weight: 300;
+        letter-spacing: -0.5px;
+    }
+
+    .content :global(h2) {
+        font-size: 2rem;
+        margin: 1.5rem 0 1rem;
+        font-weight: 300;
+        letter-spacing: -0.5px;
+    }
+
+    .content :global(h3) {
+        font-size: 1.5rem;
+        margin: 1.5rem 0 1rem;
+        font-weight: 300;
+        letter-spacing: -0.5px;
     }
 
     .layout {
@@ -194,13 +418,6 @@
     section {
         margin-top: 2rem;
         padding: 0 12rem;
-    }
-
-    .name {
-        font-size: 3rem;
-        font-weight: 300;
-        margin: 0;
-        line-height: 1.2;
     }
 
     .technologies {
@@ -382,6 +599,13 @@
             display: none;
         }
 
+        .table-of-contents {
+            display: none;
+        }
+
+        .project-section {
+            margin-left: 0;
+        }
     }
 
     @media (max-width: 480px) {
@@ -430,19 +654,9 @@
 
     @media (min-width: 769px) {
         .content :global(img) {
-            max-width: 500px;
-            width: auto;
+            max-width: 100%;
+            width: 100%;
         }
-    }
-
-    .content :global(h1) {
-        font-size: 2rem;
-        margin: 2rem 0 1rem;
-    }
-
-    .content :global(h2) {
-        font-size: 1.5rem;
-        margin: 1.5rem 0 1rem;
     }
 
     .content :global(p) {
@@ -590,5 +804,146 @@
         display: block;
     }
 
+    .table-of-contents {
+        position: fixed;
+        top: 55%;
+        left: 4rem;
+        transform: translateY(-50%);
+        z-index: 1000;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        padding-top: 2rem;
+    }
 
+    .table-of-contents.visible {
+        opacity: 1;
+        transform: translateY(-50%);
+    }
+
+    .table-of-contents ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .toc-item a {
+        color: #000;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 300;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: inline-block;
+        opacity: 1;
+    }
+
+    .dark-mode .toc-item a {
+        color: #fff;
+    }
+
+    .toc-item.active a {
+        color: #666;
+        transform: translateX(20px);
+    }
+
+    .toc-item a:hover {
+        color: #666;
+        transform: translateX(20px);
+    }
+
+    .dark-mode .toc-item a:hover,
+    .dark-mode .toc-item.active a {
+        color: #999;
+    }
+
+    .level-1 { font-size: 0.9rem; }
+    .level-2 { font-size: 0.8rem; padding-left: 1rem; }
+    .level-3 { font-size: 0.75rem; padding-left: 2rem; }
+
+    @media (max-width: 1000px) {
+        .table-of-contents {
+            display: none;
+        }
+    }
+
+    /* Adjust the main content area to make room for TOC */
+    .project-section {
+        margin-left: 15%;
+        max-width: 800px;
+    }
+
+    @media (max-width: 1000px) {
+        .project-section {
+            margin-left: 0;
+        }
+    }
+
+    .content :global(pre) {
+        background-color: #f8f8f8;
+        border: 1px solid #e1e1e1;
+        border-radius: 4px;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        overflow-x: auto;
+    }
+
+    .content :global(pre code) {
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        font-family: 'Fira Code', 'Consolas', monospace;
+        font-size: 0.80rem;
+        line-height: 1.5;
+    }
+
+    .content :global(code) {
+        background-color: #f8f8f8;
+        border: 1px solid #e1e1e1;
+        border-radius: 3px;
+        padding: 0.2em 0.4em;
+        font-family: 'Fira Code', 'Consolas', monospace;
+        font-size: 0.80em;
+    }
+
+    .dark-mode .content :global(pre),
+    .dark-mode .content :global(code) {
+        background-color: #2a2a2a;
+        border-color: #404040;
+    }
+
+    .content :global(pre)::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .content :global(pre)::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    .content :global(pre)::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+
+    .content :global(pre)::-webkit-scrollbar-thumb:hover {
+        background: #666;
+    }
+
+    .dark-mode .content :global(pre)::-webkit-scrollbar-track {
+        background: #1a1a1a;
+    }
+
+    .dark-mode .content :global(pre)::-webkit-scrollbar-thumb {
+        background: #666;
+    }
+
+    .dark-mode .content :global(pre)::-webkit-scrollbar-thumb:hover {
+        background: #888;
+    }
 </style> 
