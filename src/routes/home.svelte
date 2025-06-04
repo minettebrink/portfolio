@@ -154,7 +154,7 @@
                     <ul>
                         <li>Grown the community from 400 to 1000 members (+250%).</li>
                         <li>Organised a 200-person hackathon in partnership with Anthropic, HuggingFace, General Catalyst and Koyeb at Station F.</li>
-                        <li>Achieved an overall satisfaction score of 4.3/5 at all events.</li>
+                        <li>Achieved an overall satisfaction score of 4.4/5 at all events.</li>
                     </ul>
 
                     <p>
