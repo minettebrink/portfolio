@@ -12,7 +12,7 @@ export const videoGenerator: Project = {
     description: 'An AI-powered video generation tool that creates engaging content automatically.',
     content,
     technologies: ['Sveltekit', 'TypeScript', 'FastAPI', 'Ligthricks/LTX-Video'],
-    date: '2024-03-15',
+    date: '2024-04-15',
     tags: ['AI', 'Video', 'Web Development'],
     image: videoGeneratorImage,
     images: [
