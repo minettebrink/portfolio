@@ -1,6 +1,6 @@
 
 ## Introduction
-This website showcases my projects, skills, and experiences in developer relations. The goal was to create a clean, modern, and user-friendly portfolio website that would effectively showcase my projects and skills. I wanted to ensure that the website would be visually appealing, performant, and accessible while maintaining a professional appearance.
+This website showcases my projects, skills, and experiences in developer relations. The goal was to create a clean, modern, and user-friendly portfolio website that would effectively showcase my projects and skills. I wanted to ensure that the website would be visually appealing, accessible, and maintain a professional appearance.
 
 ## Key Features
 ### Responsive Design
