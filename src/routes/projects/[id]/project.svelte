@@ -40,60 +40,142 @@
             // Set up intersection observer for headings
             const observer = new IntersectionObserver(
                 (entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            activeHeading = entry.target.id;
-                        } else {
-                            // Check if we're at the bottom of the page
-                            const isAtBottom = (window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 200;
-                            if (isAtBottom) {
-                                // Find the most visible heading near the bottom
-                                const visibleHeadings = Array.from(headingElements).filter(heading => {
-                                    const rect = heading.getBoundingClientRect();
-                                    return rect.top <= window.innerHeight;
-                                });
-                                if (visibleHeadings.length > 0) {
-                                    activeHeading = visibleHeadings[visibleHeadings.length - 1].id;
-                                }
+                    const scrollingUp = lastScrollY > window.pageYOffset;
+                    lastScrollY = window.pageYOffset;
+
+                    if (!scrollingUp) {
+                        // Only use observer for scrolling down
+                        entries.forEach(entry => {
+                            const headingRect = entry.target.getBoundingClientRect();
+                            if (headingRect.top < window.innerHeight * 0.3 && headingRect.bottom > 0) {
+                                activeHeading = entry.target.id;
                             }
-                            // Check if we're at the top of the page
-                            const isAtTop = window.pageYOffset <= 100;
-                            if (isAtTop) {
-                                const firstHeading = headingElements[0];
-                                if (firstHeading) {
-                                    activeHeading = firstHeading.id;
-                                }
-                            }
-                        }
-                    });
+                        });
+                    }
                 },
                 {
-                    rootMargin: '-10% 0px -40%',
-                    threshold: [0, 0.1, 0.2, 0.5]
+                    rootMargin: '0px',
+                    threshold: [0, 0.1]
                 }
             );
 
+            let lastScrollY = window.pageYOffset;
+            let scrollTimeout: number | null = null;
+            let lastActiveChange = Date.now();
+            const CHANGE_THRESHOLD = 200; // Minimum time between changes in ms
+            
             headingElements.forEach(heading => observer.observe(heading));
 
-            // Add scroll event listener for first and last sections
+            // Function to find the most appropriate heading
+            function findAppropriateHeading() {
+                const viewportHeight = window.innerHeight;
+                const headingsWithPositions = Array.from(headingElements).map(h => ({
+                    id: h.id,
+                    rect: h.getBoundingClientRect(),
+                    element: h
+                }));
+
+                // Filter headings that are in good viewing position
+                const visibleHeadings = headingsWithPositions.filter(h => {
+                    const rect = h.rect;
+                    // Consider headings in the top 85% of the viewport
+                    return rect.top < viewportHeight * 0.85 && rect.bottom > 0;
+                });
+
+                if (visibleHeadings.length === 0) return null;
+
+                // Sort by position from top to bottom
+                visibleHeadings.sort((a, b) => a.rect.top - b.rect.top);
+
+                // If we're near the bottom of the page
+                const isNearBottom = (window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 300;
+                
+                if (isNearBottom) {
+                    // Find headings that are properly visible
+                    const properlyVisibleHeadings = visibleHeadings.filter(h => 
+                        h.rect.top > -50 && h.rect.bottom <= viewportHeight * 0.95
+                    );
+                    
+                    if (properlyVisibleHeadings.length > 0) {
+                        // Get the last properly visible heading
+                        return properlyVisibleHeadings[properlyVisibleHeadings.length - 1];
+                    }
+                }
+
+                // For normal scrolling, get the last heading that's started to enter the viewport
+                const activeHeadings = visibleHeadings.filter(h => 
+                    h.rect.top <= viewportHeight * 0.5
+                );
+
+                return activeHeadings.length > 0 ? 
+                    activeHeadings[activeHeadings.length - 1] : 
+                    visibleHeadings[0];
+            }
+
+            // Add scroll event listener for immediate response
             window.addEventListener('scroll', () => {
-                const isAtBottom = (window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 200;
-                const isAtTop = window.pageYOffset <= 100;
+                const now = Date.now();
+                const scrollingUp = lastScrollY > window.pageYOffset;
+                const scrollDelta = Math.abs(lastScrollY - window.pageYOffset);
+                lastScrollY = window.pageYOffset;
+
+                // Clear any existing timeout
+                if (scrollTimeout) {
+                    window.clearTimeout(scrollTimeout);
+                }
+
+                // Only process if enough time has passed since last change and scroll delta is significant
+                if (scrollingUp && now - lastActiveChange > CHANGE_THRESHOLD && scrollDelta > 20) {
+                    const headingsWithPositions = Array.from(headingElements).map(h => ({
+                        id: h.id,
+                        rect: h.getBoundingClientRect(),
+                        element: h
+                    }));
+
+                    const currentVisibleHeading = headingsWithPositions.find(h => 
+                        h.rect.top <= window.innerHeight * 0.4 && h.rect.bottom > 0
+                    );
+
+                    if (currentVisibleHeading) {
+                        const currentIndex = headingsWithPositions.findIndex(h => h.id === currentVisibleHeading.id);
+                        if (currentIndex > 0) {
+                            const newActiveHeading = headingsWithPositions[currentIndex - 1].id;
+                            if (newActiveHeading !== activeHeading) {
+                                activeHeading = newActiveHeading;
+                                lastActiveChange = now;
+                            }
+                        }
+                    }
+                } else if (!scrollingUp) {
+                    // For scrolling down, use a small delay to prevent too frequent updates
+                    scrollTimeout = window.setTimeout(() => {
+                        const appropriateHeading = findAppropriateHeading();
+                        if (appropriateHeading && appropriateHeading.id !== activeHeading) {
+                            activeHeading = appropriateHeading.id;
+                            lastActiveChange = now;
+                        }
+                    }, 50);
+                }
+
+                // Handle edge cases
+                const isAtBottom = (window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 50;
+                const isAtTop = window.pageYOffset <= 50;
 
                 if (isAtBottom) {
-                    // Find the most visible heading near the bottom
-                    const visibleHeadings = Array.from(headingElements).filter(heading => {
-                        const rect = heading.getBoundingClientRect();
-                        return rect.top <= window.innerHeight;
+                    // When at bottom, explicitly check for the last properly visible heading
+                    const lastHeadings = Array.from(headingElements).reverse();
+                    const lastVisibleHeading = lastHeadings.find(h => {
+                        const rect = h.getBoundingClientRect();
+                        return rect.top > -50 && rect.bottom <= window.innerHeight * 0.95;
                     });
-                    if (visibleHeadings.length > 0) {
-                        activeHeading = visibleHeadings[visibleHeadings.length - 1].id;
+                    
+                    if (lastVisibleHeading) {
+                        activeHeading = lastVisibleHeading.id;
+                        lastActiveChange = now;
                     }
                 } else if (isAtTop) {
-                    const firstHeading = headingElements[0];
-                    if (firstHeading) {
-                        activeHeading = firstHeading.id;
-                    }
+                    activeHeading = headingElements[0].id;
+                    lastActiveChange = now;
                 }
             });
         }
@@ -245,7 +327,7 @@
         color: #fff;
     }
 
-    h1, h2, h3 {
+    h1 {
         font-weight: 300;
         letter-spacing: -0.5px;
     }
