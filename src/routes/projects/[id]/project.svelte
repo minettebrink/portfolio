@@ -884,4 +884,66 @@
         }
     }
 
+    .content :global(pre) {
+        background-color: #f8f8f8;
+        border: 1px solid #e1e1e1;
+        border-radius: 4px;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        overflow-x: auto;
+    }
+
+    .content :global(pre code) {
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        font-family: 'Fira Code', 'Consolas', monospace;
+        font-size: 0.80rem;
+        line-height: 1.5;
+    }
+
+    .content :global(code) {
+        background-color: #f8f8f8;
+        border: 1px solid #e1e1e1;
+        border-radius: 3px;
+        padding: 0.2em 0.4em;
+        font-family: 'Fira Code', 'Consolas', monospace;
+        font-size: 0.80em;
+    }
+
+    .dark-mode .content :global(pre),
+    .dark-mode .content :global(code) {
+        background-color: #2a2a2a;
+        border-color: #404040;
+    }
+
+    .content :global(pre)::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .content :global(pre)::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    .content :global(pre)::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+
+    .content :global(pre)::-webkit-scrollbar-thumb:hover {
+        background: #666;
+    }
+
+    .dark-mode .content :global(pre)::-webkit-scrollbar-track {
+        background: #1a1a1a;
+    }
+
+    .dark-mode .content :global(pre)::-webkit-scrollbar-thumb {
+        background: #666;
+    }
+
+    .dark-mode .content :global(pre)::-webkit-scrollbar-thumb:hover {
+        background: #888;
+    }
 </style> 
