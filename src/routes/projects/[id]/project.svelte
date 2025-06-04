@@ -475,6 +475,9 @@
 
         .theme-toggle {
             display: none !important;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
         }
 
         .home-link {

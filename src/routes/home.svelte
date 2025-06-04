@@ -761,6 +761,13 @@
             border: none;
         }
 
+        .theme-toggle {
+            display: none !important;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+
         .menu-bar {
             position: fixed;
             top: 0;
