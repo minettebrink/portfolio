@@ -290,7 +290,6 @@
             class="scroll-top-button" 
             on:click={scrollToTop} 
             aria-label="Scroll to top"
-            transition:fade={{ duration: 800 }}
         >
             <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -311,14 +310,27 @@
 </div>
 
 <style>
-    /* Base styles */
+    :global(:root) {
+        --bg-color: #fff;
+        --text-color: #000;
+    }
+
+    :global(:root.dark-mode) {
+        --bg-color: #1a1a1a;
+        --text-color: #fff;
+    }
+
     :global(body) {
         margin: 0;
         font-family: 'Helvetica Neue', Arial, sans-serif;
         line-height: 1.6;
         color: #000;
         background-color: #fff;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        scroll-behavior: smooth;
+    }
+
+    :global(html) {
+        background-color: #fff;
     }
 
     :global(html.dark-mode),
@@ -327,50 +339,12 @@
         color: #fff;
     }
 
-    h1 {
-        font-weight: 300;
-        letter-spacing: -0.5px;
-    }
-
-    .name {
-        font-size: 4rem;
-        font-weight: 500;
-        margin: 0;
-        line-height: 1.2;
-    }
-
-    .content :global(h1), .content :global(h2), .content :global(h3) {
-        scroll-margin-top: 100px;
-    }
-
-    .content :global(h1) {
-        font-size: 3rem;
-        margin: 2rem 0 1rem;
-        font-weight: 300;
-        letter-spacing: -0.5px;
-    }
-
-    .content :global(h2) {
-        font-size: 2rem;
-        margin: 1.5rem 0 1rem;
-        font-weight: 300;
-        letter-spacing: -0.5px;
-    }
-
-    .content :global(h3) {
-        font-size: 1.5rem;
-        margin: 1.5rem 0 1rem;
-        font-weight: 300;
-        letter-spacing: -0.5px;
-    }
-
     .layout {
         min-height: 100vh;
         position: relative;
         border: 1px solid black;
         margin: 2rem;
         padding: 0;
-        transition: border-color 0.3s ease, background-color 0.3s ease;
     }
 
     .layout.dark-mode {
@@ -749,17 +723,17 @@
         right: 2rem;
         background: #fff;
         border: none;
-        color: inherit;
+        color: #000;
         font-size: 1.5rem;
         cursor: pointer;
         padding: 0.5rem 0rem;
         z-index: 1000;
-        transition: color 0.3s ease, background-color 0.3s ease;
         transform: translateX(50%);
     }
 
     .dark-mode .theme-toggle {
         background: #1a1a1a;
+        color: #fff;
     }
 
     .theme-toggle:hover {
@@ -773,7 +747,7 @@
         right: 2rem;
         transform: translate(50%, -50%);
         background-color: #fff;
-        color: black;
+        color: #000;
         border: none;
         border-radius: 0;
         width: auto;
@@ -785,11 +759,9 @@
         justify-content: center;
         z-index: 1000;
         box-shadow: none;
-        transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .scroll-top-button:hover {
-        background-color: #fff;
         color: #555;
     }
 
@@ -799,7 +771,6 @@
     }
 
     .dark-mode .scroll-top-button:hover {
-        background-color: #1a1a1a;
         color: #ccc;
     }
 
