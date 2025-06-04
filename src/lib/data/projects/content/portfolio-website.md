@@ -30,7 +30,7 @@ The projects section highlights my work with detailed descriptions, technologies
 - Proper heading hierarchy
 
 
-## Conclusion and Future Enhancements
+## Future Enhancements
 While the website is functional and meets current needs, there's always room for improvement. Here are some planned enhancements:
 - Adding more projects
 - Enhancing the blog functionality with categories and search
